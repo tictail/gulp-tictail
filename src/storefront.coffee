@@ -3,6 +3,7 @@ Q = require 'q'
 express = require 'express'
 consolidate = require 'consolidate'
 Api = require './api'
+transforms = require './transforms'
 
 
 api = new Api()
@@ -17,8 +18,8 @@ app.use((req, res, next) ->
   id = 'px8'
 
   res.promises = []
-  res.promises.push api.get("stores/#{id}")
-  res.promises.push api.get("stores/#{id}/categories")
+  res.promises.push(transforms.store(api.get("stores/#{id}")))
+  res.promises.push(transforms.navigation(api.get("stores/#{id}/categories")))
 
   next()
 )
