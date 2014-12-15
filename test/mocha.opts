@@ -1,0 +1,4 @@
+--require should
+--ui bdd
+--reporter nyan
+--compilers coffee:coffee-script/register

@@ -8,5 +8,8 @@ clean:
 build: clean
 	coffee -o lib -c src
 
+test: build
+	mocha
+
 publish: clean build
 	npm publish
