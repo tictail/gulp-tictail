@@ -14,6 +14,8 @@
     "express": "^4.10.6",
     "gulp-util": "^3.0.1",
     "lodash": "^2.4.1"
+    "q": "^1.1.2",
+    "request": "^2.51.0"
   },
   "devDependencies": {
     "coffee-script": "^1.8.0",
