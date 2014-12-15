@@ -1,7 +1,10 @@
 {
   "name": "gulp-tictail",
   "version": "0.0.1",
-  "author": ["Joakim Ekberg", "Erik Eng"],
+  "author": [
+    "Joakim Ekberg",
+    "Erik Eng"
+  ],
   "description": "",
   "license": "MIT",
   "repository": "https://github.com/tictail/gulp-tictail.git",
