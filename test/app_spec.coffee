@@ -3,6 +3,7 @@ express = require 'express'
 
 storefront = require '../lib/storefront'
 
+
 storefront.set('views', __dirname)
 
 describe 'Storefront', ->
