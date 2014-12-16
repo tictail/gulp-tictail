@@ -1,5 +1,7 @@
 # gulp-tictail
 
+[![Build Status](https://travis-ci.org/tictail/gulp-tictail.svg?branch=master)](https://travis-ci.org/tictail/gulp-tictail)
+
 Gulp target for simplifying Tictail theme creation.
 
 ### Installation
