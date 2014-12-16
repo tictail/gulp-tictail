@@ -1,18 +1,32 @@
-_    = require 'lodash'
-slug = require 'slug'
-Q    = require 'q'
+_     = require 'lodash'
+slug  = require 'slug'
+Q     = require 'q'
+merge = require 'merge'
 
 module.exports = (store, categories) ->
 
-	Q.spread [store, categories], (store, categories) ->
-    console.log categories
-    data =
-      navigation: _.map categories, (category) ->
+  Q.spread [store, categories], (store, categories) ->
+    navigation = {}
+    for category in categories
+      item =
         label: category.title
         product_count: category.product_count
-        url: "/products/#{slug(category.title)}"
+        url: "/products/#{slug(category.title).toLowerCase()}"
         count: category.product_count
-        # TODO: Map child categories to their parent
+        children: []
+      if category.parent_id
+        if not navigation[category.parent_id]
+          navigation[category.parent_id] =
+            children: []
+        navigation[category.parent_id].children.push item
+      else
+        if navigation[category.id]
+          navigation[category.id] = merge.recursive(navigation[category.id], item)
+        else
+          navigation[category.id] = item
+
+    data =
+      navigation: _.values navigation
 
     data.terms = ->
       (label) ->
