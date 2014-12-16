@@ -28,8 +28,29 @@ module.exports = (response) ->
           for size, url of image.sizes
             data['url-'+size] = url
           data
+        variations: _.map product.variations, (variation) ->
+          console.log variation
+          return false if not variation.title
+          label: variation.title
+          position: 0
+          identifier: variation.id
+          quantity: variation.quantity
+          is_default: false
+          in_stock: variation.quantity || variation.unlimited
+          out_of_stock: !variation.quantity && !variation.unlimited
+
+      if product.variations.length is 1
+        product.variations = []
+
       if product.all_images
         product.primary_image = product.all_images[0]
+
+      if not product.out_of_stock
+        product.add_to_cart =
+          add_to_cart_button: ->
+            (label) ->
+              "<button type=\"submit\" class=\"tictail_button tictail_add_to_cart_button\">#{label}</button>"
+
       product
 
     {
