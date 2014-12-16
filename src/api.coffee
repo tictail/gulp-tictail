@@ -10,6 +10,5 @@ module.exports = class Api
   get: (endpoint) =>
     if @cache[endpoint]?
       Q.resolve(@cache[endpoint])
-    else Q.nfcall(request.get, "#{@base}/#{endpoint}").then((data) =>
+    else Q.nfcall(request.get, "#{@base}/#{endpoint}").then (data) =>
       @cache[endpoint] = JSON.parse data[0].body
-    )

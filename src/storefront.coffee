@@ -15,9 +15,10 @@ app.set 'view engine', 'mustache'
 app.set 'views', './src'
 app.disable 'etag'
 
-app.use (req, res, next) ->
-  id = 'px8'
+id = 'px8' # TODO: Use config
 
+
+app.use (req, res, next) ->
   res.promises = []
   store = api.get "stores/#{id}"
   res.promises.push transforms.store store
@@ -25,10 +26,16 @@ app.use (req, res, next) ->
     store
     api.get("stores/#{id}/categories")
   )
-
   next()
 
-app.get '/', (req, res, next) -> next()
+app.get '/', (req, res, next) ->
+  res.promises.push transforms.products api.get "stores/#{id}/products"
+  res.data =
+    list_page:
+      on_index: true
+      no_current_navigation: true
+  next()
+
 app.get '/products', (req, res, next) -> next()
 app.get '/product/:slug', (req, res, next) -> next()
 app.get '*', (req, res, next) -> next()
@@ -41,9 +48,12 @@ app.use (req, res) ->
       data = {}
       for result in results
         data = merge.recursive(data, result)
+      if res.data
+        data = merge.recursive(data, res.data)
       res.render 'theme', data
     .catch (reason) ->
       console.log reason
       res.status(500)
+
 
 module.exports = app

@@ -1,6 +1,6 @@
 module.exports = (response) ->
 
-	response.then (store) ->
+  response.then (store) ->
     data =
       store_name: store.name
       store_url: ''
