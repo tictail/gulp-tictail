@@ -5,7 +5,7 @@
     "Joakim Ekberg",
     "Erik Eng"
   ],
-  "description": "Gulp target for simplyfying Tictail theme creation",
+  "description": "Gulp target for simplifying Tictail theme creation",
   "license": "MIT",
   "repository": "https://github.com/tictail/gulp-tictail.git",
   "main": "lib/index.js",
