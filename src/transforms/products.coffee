@@ -9,7 +9,7 @@ module.exports = (response) ->
   response.then (products) ->
     data = _.map products, (product) ->
       price = price_to_major product.price, product.currency
-      {
+      product =
         title: product.title
         description: product.description
         url: "product/#{product.slug}"
@@ -23,7 +23,14 @@ module.exports = (response) ->
         is_quantity_unlimited: product.unlimited
         in_stock: product.quantity || product.unlimited
         out_of_stock: !product.quantity && !product.unlimited
-      }
+        all_images: _.map product.images, (image) ->
+          data = {}
+          for size, url of image.sizes
+            data['url-'+size] = url
+          data
+      if product.all_images
+        product.primary_image = product.all_images[0]
+      product
 
     {
       list_page:
