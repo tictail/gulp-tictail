@@ -48,7 +48,11 @@ app.get '/products/:slug/:slug?', (req, res, next) ->
   next()
 
 app.get '/product/:slug', (req, res, next) -> next()
-app.get '*', (req, res, next) -> next()
+
+app.get '/:guid', (req, res, next) ->
+  res.data = {}
+  res.data["#{req.params.guid}_page"] = true
+  next()
 
 app.use (req, res) ->
   # TODO Load partials
