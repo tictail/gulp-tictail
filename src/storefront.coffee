@@ -15,21 +15,19 @@ app.set 'view engine', 'mustache'
 app.set 'views', './src'
 app.disable 'etag'
 
-id = 'px8' # TODO: Use config
-
 
 app.use (req, res, next) ->
   res.promises = []
-  store = api.get "stores/#{id}"
+  store = api.get "stores/#{app.get 'store_id'}"
   res.promises.push transforms.store store
   res.promises.push transforms.navigation(
     store
-    api.get("stores/#{id}/categories")
+    api.get("stores/#{app.get 'store_id'}/categories")
   )
   next()
 
 app.get '/', (req, res, next) ->
-  res.promises.push transforms.products api.get "stores/#{id}/products"
+  res.promises.push transforms.products api.get "stores/#{app.get 'store_id'}/products"
   res.data =
     list_page:
       on_index: true
@@ -37,12 +35,12 @@ app.get '/', (req, res, next) ->
   next()
 
 app.get '/products', (req, res, next) ->
-  res.promises.push transforms.products api.get "stores/#{id}/products"
+  res.promises.push transforms.products api.get "stores/#{app.get 'store_id'}/products"
   next()
 
 app.get '/products/:slug/:slug?', (req, res, next) ->
   res.promises.push transforms.products(
-    api.get "stores/#{id}/products"
+    api.get "stores/#{app.get 'store_id'}/products"
     req.params.slug
   )
   next()

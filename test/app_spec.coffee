@@ -2,6 +2,7 @@ request = require 'supertest'
 express = require 'express'
 
 storefront = require '../lib/storefront'
+storefront.set 'store_id', 't'
 
 
 storefront.set('views', __dirname)
