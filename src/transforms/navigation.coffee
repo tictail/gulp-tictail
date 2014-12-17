@@ -15,6 +15,7 @@ module.exports = (store, categories) ->
         count: category.product_count
         children: []
       if category.parent_id
+        item.url = "#{navigation[category.parent_id].url}/#{slug(category.title).toLowerCase()}"
         if not navigation[category.parent_id]
           navigation[category.parent_id] =
             children: []

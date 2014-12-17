@@ -40,7 +40,7 @@ app.get '/products', (req, res, next) ->
   res.promises.push transforms.products api.get "stores/#{id}/products"
   next()
 
-app.get '/products/:slug', (req, res, next) ->
+app.get '/products/:slug/:slug?', (req, res, next) ->
   res.promises.push transforms.products(
     api.get "stores/#{id}/products"
     req.params.slug
