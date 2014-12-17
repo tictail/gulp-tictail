@@ -36,7 +36,17 @@ app.get '/', (req, res, next) ->
       no_current_navigation: true
   next()
 
-app.get '/products', (req, res, next) -> next()
+app.get '/products', (req, res, next) ->
+  res.promises.push transforms.products api.get "stores/#{id}/products"
+  next()
+
+app.get '/products/:slug', (req, res, next) ->
+  res.promises.push transforms.products(
+    api.get "stores/#{id}/products"
+    req.params.slug
+  )
+  next()
+
 app.get '/product/:slug', (req, res, next) -> next()
 app.get '*', (req, res, next) -> next()
 
@@ -52,7 +62,7 @@ app.use (req, res) ->
         data = merge.recursive(data, res.data)
       res.render 'theme', data
     .catch (reason) ->
-      console.log reason
+      console.log reason, reason.stack
       res.status(500)
 
 
