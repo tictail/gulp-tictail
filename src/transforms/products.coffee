@@ -1,11 +1,10 @@
-_    = require 'lodash'
-slug = require 'slug'
+_ = require 'lodash'
 
 module.exports = (response, categorySlug) ->
 
   inCategory = (product) ->
     for category in product.categories
-      if categorySlug is slug(category.title).toLowerCase()
+      if categorySlug is category.slug
         return true
       else
         continue

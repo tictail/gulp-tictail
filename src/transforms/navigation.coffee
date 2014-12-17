@@ -1,6 +1,5 @@
-_     = require 'lodash'
-slug  = require 'slug'
-Q     = require 'q'
+_ = require 'lodash'
+Q = require 'q'
 merge = require 'merge'
 
 module.exports = (store, categories) ->
@@ -11,11 +10,11 @@ module.exports = (store, categories) ->
       item =
         label: category.title
         product_count: category.product_count
-        url: "/products/#{slug(category.title).toLowerCase()}"
+        url: "/products/#{category.slug}"
         count: category.product_count
         children: []
       if category.parent_id
-        item.url = "#{navigation[category.parent_id].url}/#{slug(category.title).toLowerCase()}"
+        item.url = "#{navigation[category.parent_id].url}/#{category.slug}"
         if not navigation[category.parent_id]
           navigation[category.parent_id] =
             children: []

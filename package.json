@@ -21,8 +21,7 @@
     "mustache": "^0.8.2",
     "q": "^1.1.2",
     "request": "^2.51.0",
-    "requireindex": "^1.1.0",
-    "slug": "^0.8.0"
+    "requireindex": "^1.1.0"
   },
   "devDependencies": {
     "coffee-script": "^1.8.0",
@@ -32,5 +31,11 @@
     "should": "^4.4.1",
     "sinon": "^1.12.2",
     "supertest": "^0.15.0"
-  }
+  },
+  "keywords": [
+    "gulp",
+    "gulpfriendly",
+    "gulpplugin",
+    "tictail"
+  ]
 }
