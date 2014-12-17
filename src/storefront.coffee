@@ -62,6 +62,17 @@ app.use (req, res) ->
         data = merge.recursive(data, result)
       if res.data
         data = merge.recursive(data, res.data)
+      for category in data.navigation
+        if req.path is category.url
+          category.is_current = true
+          data.list_page.current_navigation = category
+          break
+        for subcategory in category.children
+          if req.path is subcategory.url
+            category.is_current = true
+            subcategory.is_current = true
+            data.list_page.current_navigation = subcategory
+            break
       res.render 'theme', data
     .catch (reason) ->
       console.log reason, reason.stack

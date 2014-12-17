@@ -13,6 +13,7 @@ module.exports = (store, categories) ->
         url: "/products/#{category.slug}"
         count: category.product_count
         children: []
+        is_current: false
       if category.parent_id
         item.url = "#{navigation[category.parent_id].url}/#{category.slug}"
         if not navigation[category.parent_id]
