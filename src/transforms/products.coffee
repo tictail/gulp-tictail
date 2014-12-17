@@ -29,7 +29,6 @@ module.exports = (response) ->
             data['url-'+size] = url
           data
         variations: _.map product.variations, (variation) ->
-          console.log variation
           return false if not variation.title
           label: variation.title
           position: 0
