@@ -15,4 +15,4 @@ module.exports =
     app = express()
     app.use express.static config.dist
     app.use storefront
-    app.listen config.port, -> util.log "I'm alive!"
+    app.listen config.port, -> util.log "Serving your awesome theme at http://localhost:#{config.port}/"
