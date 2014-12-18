@@ -1,6 +1,6 @@
 PATH := ./node_modules/.bin:${PATH}
 
-.PHONY : clean build publish
+.PHONY : clean build test publish
 
 clean:
 	rm -rf lib
