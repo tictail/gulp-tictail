@@ -12,7 +12,6 @@ api = new Api()
 app = express()
 app.engine 'mustache', consolidate.mustache
 app.set 'view engine', 'mustache'
-app.set 'views', './src'
 app.disable 'etag'
 
 
