@@ -1,10 +1,9 @@
 _ = require 'lodash'
-Q = require 'q'
 merge = require 'merge'
 
-module.exports = (store, categories) ->
 
-  Q.spread [store, categories], (store, categories) ->
+module.exports =
+  transform: (store, categories) ->
     navigation = {}
     for category in categories
       item =
@@ -26,15 +25,15 @@ module.exports = (store, categories) ->
         else
           navigation[category.id] = item
 
-    data =
+    navigation =
       navigation: _.values navigation
 
-    data.terms = ->
+    navigation.terms = ->
       (label) ->
         "<a class=\"tictail_terms fullscreen fullscreen_iframe\" href=\"#{store.url}/legal/terms\">#{label}</a>"
 
-    data.return_policy = ->
+    navigation.return_policy = ->
       (label) ->
         "<a class=\"tictail_return-policy fullscreen fullscreen_iframe\" href=\"#{store.url}/legal/return-policy\">#{label}</a>"
 
-    data
+    navigation

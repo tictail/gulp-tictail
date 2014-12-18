@@ -15,41 +15,75 @@ app.engine 'mustache', consolidate.mustache
 app.set 'view engine', 'mustache'
 app.disable 'etag'
 
-
 app.use (req, res, next) ->
   res.promises = []
+
   store = api.get "stores/#{app.get 'store_id'}"
-  res.promises.push transforms.store store
-  res.promises.push transforms.navigation(
-    store
-    api.get("stores/#{app.get 'store_id'}/categories")
+
+  res.promises.push(store.then (data) -> transforms.store.transform(data))
+  res.promises.push(
+    Q.spread([
+      store,
+      api.get("stores/#{app.get 'store_id'}/categories"),
+    ], (store, categories) ->
+      transforms.navigation.transform(store, categories)
+    )
   )
+
   next()
 
 app.get '/', (req, res, next) ->
-  res.promises.push transforms.products.transform api.get "stores/#{app.get 'store_id'}/products"
-  res.data =
-    list_page:
-      on_index: true
-      no_current_navigation: true
+  res.promises.push(
+    api.get("stores/#{app.get 'store_id'}/products")
+      .then (data) -> list_page: products: transforms.products.transform(data)
+  )
+
+  res.promises.push(
+    Q.resolve(
+      list_page:
+        on_index: true
+        no_current_navigation: true
+    )
+  )
+
   next()
 
 app.get '/products', (req, res, next) ->
-  res.promises.push transforms.products.transform api.get "stores/#{app.get 'store_id'}/products"
+  # TODO Move this duplication somewhere
+  res.promises.push(
+    api.get("stores/#{app.get 'store_id'}/products").then (data) ->
+      list_page: products: transforms.products.transform(data)
+  )
+
   next()
 
 app.get '/products/:slug/:slug?', (req, res, next) ->
-  res.promises.push transforms.products.transform(
-    api.get "stores/#{app.get 'store_id'}/products"
-    req.params.slug
+  slug = req.params.slug
+
+  res.promises.push(
+    api.get("stores/#{app.get 'store_id'}/products").then (data) ->
+      list_page: products: transforms.products.transform(data, slug)
   )
+
   next()
 
-app.get '/product/:slug', (req, res, next) -> next()
+app.get '/product/:slug', (req, res, next) ->
+  slug = req.params.slug
+
+  res.promises.push(
+    api.get("stores/#{app.get 'store_id'}/products").then (data) ->
+      datum = _.find(data, (datum) -> datum.slug == slug)
+      product_page: product: transforms.product.transform(datum)
+  )
+
+  next()
 
 app.get '/:guid', (req, res, next) ->
-  res.data = {}
-  res.data["#{req.params.guid}_page"] = true
+  data = {}
+  data["#{req.params.guid}_page"] = true
+
+  res.promises.push(Q.resolve(data))
+
   next()
 
 app.use (req, res) ->
@@ -66,8 +100,7 @@ app.use (req, res) ->
     .then (results) ->
       for result in results
         data = merge.recursive(data, result)
-      if res.data
-        data = merge.recursive(data, res.data)
+
       for category in data.navigation
         if req.path is category.url
           category.is_current = true
@@ -79,6 +112,7 @@ app.use (req, res) ->
             subcategory.is_current = true
             data.list_page.current_navigation = subcategory
             break
+
       res.render 'theme', data
     .catch (reason) ->
       console.log reason, reason.stack

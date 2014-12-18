@@ -1,10 +1,10 @@
-{transform, addToCartButton} = require '../lib/transforms/products'
-{shouldTransform} = require './spec_helper'
+{addToCartButton} = require '../lib/transforms/product'
+{transform} = require '../lib/transforms/products'
 
 
 describe 'Product transforms', ->
   it 'should transform empty list of products', ->
-    shouldTransform transform, [], list_page: products: []
+    transform([]).should.eql([])
 
   it 'should transform list of products', ->
     data = [{
@@ -198,7 +198,7 @@ describe 'Product transforms', ->
       "quantity": 3
     }]
 
-    shouldTransform transform, data, list_page: products: [
+    expected = [
       {
         "title": "VW Kleinbus",
         "description": "<h3>Jaja.</h3>\n\nEn skön buss.\n\n<del>asd</del>",
@@ -324,3 +324,7 @@ describe 'Product transforms', ->
         "add_to_cart":  {"add_to_cart_button": addToCartButton}
       }
     ]
+
+    transform(data).should.eql(expected)
+
+  xit 'should filter out products in categories', ->
