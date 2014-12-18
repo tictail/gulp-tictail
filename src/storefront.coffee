@@ -1,11 +1,13 @@
+fs = require 'fs'
+
 _ = require 'lodash'
 Q = require 'q'
+merge = require 'merge'
 express = require 'express'
 consolidate = require 'consolidate'
+
 Api = require './api'
 transforms = require './transforms'
-merge = require 'merge'
-fs = require 'fs'
 
 
 api = new Api()
