@@ -27,7 +27,7 @@ app.use (req, res, next) ->
   next()
 
 app.get '/', (req, res, next) ->
-  res.promises.push transforms.products api.get "stores/#{app.get 'store_id'}/products"
+  res.promises.push transforms.products.transform api.get "stores/#{app.get 'store_id'}/products"
   res.data =
     list_page:
       on_index: true
@@ -35,11 +35,11 @@ app.get '/', (req, res, next) ->
   next()
 
 app.get '/products', (req, res, next) ->
-  res.promises.push transforms.products api.get "stores/#{app.get 'store_id'}/products"
+  res.promises.push transforms.products.transform api.get "stores/#{app.get 'store_id'}/products"
   next()
 
 app.get '/products/:slug/:slug?', (req, res, next) ->
-  res.promises.push transforms.products(
+  res.promises.push transforms.products.transform(
     api.get "stores/#{app.get 'store_id'}/products"
     req.params.slug
   )
