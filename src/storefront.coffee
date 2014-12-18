@@ -5,6 +5,7 @@ consolidate = require 'consolidate'
 Api = require './api'
 transforms = require './transforms'
 merge = require 'merge'
+fs = require 'fs'
 
 
 api = new Api()
@@ -52,11 +53,17 @@ app.get '/:guid', (req, res, next) ->
   next()
 
 app.use (req, res) ->
-  # TODO Load partials
+  data =
+    partials: {}
+  _.each fs.readdirSync(app.get 'views'), (path) ->
+    match = (/(.*)\.mustache/g).exec path
+    if !match or (match && match[1] is 'theme')
+      return
+    partial = match[1]
+    data.partials[partial] = partial
 
   Q.all res.promises
     .then (results) ->
-      data = {}
       for result in results
         data = merge.recursive(data, result)
       if res.data
