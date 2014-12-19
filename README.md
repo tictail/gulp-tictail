@@ -21,7 +21,7 @@ var gulp = require('gulp'),
 
 gulp.task('serve', function() {
     tictail.serve({
-        store_id: 't'
+        store_id: 'pf'
     });
 });
 
