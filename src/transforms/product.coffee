@@ -4,8 +4,9 @@ _ = require 'lodash'
 
 
 module.exports =
-  addToCartButton: (label) ->
-    "<button type=\"submit\" class=\"tictail_button tictail_add_to_cart_button\">#{label}</button>"
+  addToCartButton: ->
+    (label) ->
+      "<button type=\"submit\" class=\"tictail_button tictail_add_to_cart_button\">#{label}</button>"
 
   transform: (data) ->
     price = priceToMajor data.price, data.currency
