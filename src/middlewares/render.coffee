@@ -1,5 +1,6 @@
 Q = require 'q'
 merge = require 'merge'
+HTTPError = require 'node-http-error'
 
 
 module.exports = (req, res) ->
@@ -22,6 +23,13 @@ module.exports = (req, res) ->
             break
 
       res.render 'theme', context
-    .catch (reason) ->
-      console.log reason, reason.stack
-      res.status(500)
+    .fail (err) ->
+      status = switch err.constructor
+        when HTTPError
+          err.status
+        else
+          console.log err
+          console.log err.stack
+          500
+
+      res.status(status).send("<code>#{status}</code>")

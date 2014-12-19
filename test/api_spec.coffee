@@ -12,6 +12,11 @@ describe 'Api', ->
       data.constructor.should.eql(Object)
     )
 
+  it 'should reject upon status > 200', ->
+    api = new Api()
+    api.get("stores/0").fail (err) ->
+      err.status.should.eql(400)
+
   it 'caches data between requests', ->
     sinon.stub(request, 'get').yields(null, [{body: '{}'}])
 
