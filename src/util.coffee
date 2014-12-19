@@ -1,4 +1,4 @@
 module.exports =
   priceToMajor: (amount, currency) ->
-    digits = currency.toLowerCase() == 'jpy' ? 0 : 2
+    digits = if currency.toLowerCase() == 'jpy' then 0 else 2
     amount / Math.pow 10, digits
