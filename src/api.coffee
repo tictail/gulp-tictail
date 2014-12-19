@@ -5,10 +5,11 @@ module.exports = class Api
   base: "https://api.tictail.com/v1"
 
   constructor: ->
-    @cache = {}
+    @promises = {}
 
   get: (endpoint) =>
-    if @cache[endpoint]?
-      Q.resolve(@cache[endpoint])
-    else Q.nfcall(request.get, "#{@base}/#{endpoint}").then (data) =>
-      @cache[endpoint] = JSON.parse data[0].body
+    if not @promises[endpoint]
+      @promises[endpoint] = Q.nfcall(request.get, "#{@base}/#{endpoint}").then (data) =>
+        JSON.parse data[0].body
+    else
+      @promises[endpoint]
