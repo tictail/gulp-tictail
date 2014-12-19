@@ -11,7 +11,7 @@ module.exports =
       logotype: {}
 
     if data.logotype
-      for size in data.logotype[0].sizes
-        store.logotype["url-#{size}"] = sizes[size]
+      for size, url of data.logotype[0].sizes
+        store.logotype["url-#{size}"] = url
 
     store
