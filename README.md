@@ -41,20 +41,18 @@ For an opinionated development setup using `gulp-tictail`, see [theme-example](h
 
 The `serve` method takes the following config options as a object:
 
-* `store_id` - The store to fetch data (products etc.) from
-* `port` - The desired port to listen on. Defaults to `5555`.
-* `src` - Path to theme source (theme.mustache) and partials. Defaults to `"./src"`
-* `dist` - Path to static assets (images, CSS etc.) used in theme. Defaults to `"./dist"`
+* `store_id` — The store to fetch data (products etc.) from.
+* `port` — The desired port to listen on. Defaults to `5555`.
+* `src` — Path to theme source (theme.mustache) and partials. Defaults to `"./src"`.
+* `dist` — Path to static assets (images, CSS etc.) used in theme. Defaults to `"./dist"`.
 
 
 ### Development
 
 ```bash
-$ npm install tictail/gulp-tictail
-```
-
-#### Testing
-
-```bash
+$ git clone https://github.com/tictail/gulp-tictail .
+$ npm install coffee-script -g
+$ npm install mocha -g
+$ npm install
 $ make test
 ```
