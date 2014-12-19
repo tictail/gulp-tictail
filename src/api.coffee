@@ -1,6 +1,7 @@
 Q = require 'q'
 request = require 'request'
 
+
 module.exports = class Api
   base: "https://api.tictail.com/v1"
 
