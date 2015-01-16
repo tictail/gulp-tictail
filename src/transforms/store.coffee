@@ -6,7 +6,7 @@ module.exports =
       store_email: 'developers@tictail.com'
       store_description: data.description
       store_blog_url: 'https://medium.com/tictail-makers'
-      store_subdomain: 'example'
+      store_subdomain: data.subdomain
       store_identifier: data.id
       logotype: {}
 

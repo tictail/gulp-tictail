@@ -4,9 +4,13 @@ _ = require 'lodash'
 
 
 module.exports =
+  addToCartForm: ->
+    (label, render) ->
+      "<form class=\"tictail_add_to_cart\">#{render(label)}</form>"
+
   addToCartButton: ->
-    (label) ->
-      "<button type=\"submit\" class=\"tictail_button tictail_add_to_cart_button\">#{label}</button>"
+    (label, render) ->
+      "<button type=\"submit\" class=\"tictail_button tictail_add_to_cart_button\">#{render(label)}</button>"
 
   transform: (data) ->
     price = priceToMajor data.price, data.currency
@@ -46,7 +50,7 @@ module.exports =
       product.primary_image = product.all_images[0]
 
     if not product.out_of_stock
-      product.add_to_cart =
-        add_to_cart_button: module.exports.addToCartButton
+      product.add_to_cart = module.exports.addToCartForm
+      product.add_to_cart_button = module.exports.addToCartButton
 
     product
