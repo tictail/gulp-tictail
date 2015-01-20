@@ -6,6 +6,7 @@ Api = require './api'
 app = express()
 app.engine 'mustache', consolidate.mustache
 app.set 'view engine', 'mustache'
+app.set 'views', [__dirname + '/views']
 app.set 'api', new Api()
 app.disable 'etag'
 
