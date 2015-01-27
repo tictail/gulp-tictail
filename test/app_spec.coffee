@@ -5,7 +5,9 @@ storefront = require '../lib/storefront'
 storefront.set 'store_id', 't'
 
 
-storefront.set('views', __dirname)
+views = storefront.get 'views'
+views.push __dirname
+storefront.set 'views', views
 
 describe 'Storefront', ->
   it 'should get /', (done) ->

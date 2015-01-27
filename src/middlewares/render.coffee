@@ -1,6 +1,7 @@
 Q = require 'q'
 merge = require 'merge'
 HTTPError = require 'node-http-error'
+cheerio = require 'cheerio'
 
 
 module.exports = (req, res) ->
@@ -22,7 +23,12 @@ module.exports = (req, res) ->
             context.list_page.current_navigation = subcategory
             break
 
-      res.render 'theme', context
+      res.render 'theme', context, (err, html) ->
+        $ = cheerio.load html
+        context.partials = {} # fixes the context modifications made by consolidate.js
+        req.app.render 'colophon', context, (err, colophon) ->
+          $('body').append colophon
+          res.send $.html()
     .fail (err) ->
       status = switch err.constructor
         when HTTPError
@@ -32,4 +38,4 @@ module.exports = (req, res) ->
           console.log err.stack
           500
 
-      res.status(status).send("<code>#{status}</code>")
+      res.status(status).send "<code>#{status}</code>"

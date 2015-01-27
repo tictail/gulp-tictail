@@ -18,6 +18,8 @@ module.exports =
     app = express()
     app.use express.static config.dist
     storefront.set 'store_id', config.store_id
-    storefront.set 'views', config.src
+    views = storefront.get 'views'
+    views.push config.src
+    storefront.set 'views', views
     app.use storefront
     app.listen config.port, -> util.log "Serving your awesome theme at http://localhost:#{config.port}/"
