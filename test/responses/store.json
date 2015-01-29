@@ -1,1 +1,43 @@
-{"description":"Testar bara.&nbsp;","language":"sv","url":"http://blackgoldenretriever.tictail.com","country":"SE","created_at":"2013-09-14T13:56:07","modified_at":null,"logotype":[{"original_height":2448,"sizes":{"30":"https://images.ttcdn.co/media/i/logotype/67486-5ada0157d6fc422685fb2a58b9adc4b9.jpeg?size=30","40":"https://images.ttcdn.co/media/i/logotype/67486-5ada0157d6fc422685fb2a58b9adc4b9.jpeg?size=40","45":"https://images.ttcdn.co/media/i/logotype/67486-5ada0157d6fc422685fb2a58b9adc4b9.jpeg?size=45","50":"https://images.ttcdn.co/media/i/logotype/67486-5ada0157d6fc422685fb2a58b9adc4b9.jpeg?size=50","75":"https://images.ttcdn.co/media/i/logotype/67486-5ada0157d6fc422685fb2a58b9adc4b9.jpeg?size=75","100":"https://images.ttcdn.co/media/i/logotype/67486-5ada0157d6fc422685fb2a58b9adc4b9.jpeg?size=100","300":"https://images.ttcdn.co/media/i/logotype/67486-5ada0157d6fc422685fb2a58b9adc4b9.jpeg?size=300","500":"https://images.ttcdn.co/media/i/logotype/67486-5ada0157d6fc422685fb2a58b9adc4b9.jpeg?size=500","640":"https://images.ttcdn.co/media/i/logotype/67486-5ada0157d6fc422685fb2a58b9adc4b9.jpeg?size=640","1000":"https://images.ttcdn.co/media/i/logotype/67486-5ada0157d6fc422685fb2a58b9adc4b9.jpeg?size=1000","2000":"https://images.ttcdn.co/media/i/logotype/67486-5ada0157d6fc422685fb2a58b9adc4b9.jpeg?size=2000"},"url":"https://images.ttcdn.co/media/i/logotype/67486-5ada0157d6fc422685fb2a58b9adc4b9.jpeg","created_at":"2014-11-22T18:17:22","modified_at":"2014-11-22T18:17:22","original_width":3264,"id":"S2g"}],"currency":"SEK","followers":1,"short_description":null,"wallpapers":{},"id":"px8","vat":{"applied_to_shipping":true,"rate":"0.250000","region":"R_EU","included_in_prices":true},"name":"VW Store"}
+{
+  "description": "Testar bara.&nbsp;",
+  "language": "sv",
+  "url": "http://blackgoldenretriever.tictail.com",
+  "country": "SE",
+  "created_at": "2013-09-14T13:56:07",
+  "modified_at": null,
+  "logotype": [
+    {
+      "original_height": 2448,
+      "sizes": {
+        "30": "https://images.ttcdn.co/media/i/logotype/67486-5ada0157d6fc422685fb2a58b9adc4b9.jpeg?size=30",
+        "40": "https://images.ttcdn.co/media/i/logotype/67486-5ada0157d6fc422685fb2a58b9adc4b9.jpeg?size=40",
+        "45": "https://images.ttcdn.co/media/i/logotype/67486-5ada0157d6fc422685fb2a58b9adc4b9.jpeg?size=45",
+        "50": "https://images.ttcdn.co/media/i/logotype/67486-5ada0157d6fc422685fb2a58b9adc4b9.jpeg?size=50",
+        "75": "https://images.ttcdn.co/media/i/logotype/67486-5ada0157d6fc422685fb2a58b9adc4b9.jpeg?size=75",
+        "100": "https://images.ttcdn.co/media/i/logotype/67486-5ada0157d6fc422685fb2a58b9adc4b9.jpeg?size=100",
+        "300": "https://images.ttcdn.co/media/i/logotype/67486-5ada0157d6fc422685fb2a58b9adc4b9.jpeg?size=300",
+        "500": "https://images.ttcdn.co/media/i/logotype/67486-5ada0157d6fc422685fb2a58b9adc4b9.jpeg?size=500",
+        "640": "https://images.ttcdn.co/media/i/logotype/67486-5ada0157d6fc422685fb2a58b9adc4b9.jpeg?size=640",
+        "1000": "https://images.ttcdn.co/media/i/logotype/67486-5ada0157d6fc422685fb2a58b9adc4b9.jpeg?size=1000",
+        "2000": "https://images.ttcdn.co/media/i/logotype/67486-5ada0157d6fc422685fb2a58b9adc4b9.jpeg?size=2000"
+      },
+      "url": "https://images.ttcdn.co/media/i/logotype/67486-5ada0157d6fc422685fb2a58b9adc4b9.jpeg",
+      "created_at": "2014-11-22T18:17:22",
+      "modified_at": "2014-11-22T18:17:22",
+      "original_width": 3264,
+      "id": "S2g"
+    }
+  ],
+  "currency": "SEK",
+  "followers": 1,
+  "short_description": null,
+  "wallpapers": {},
+  "id": "px8",
+  "vat": {
+    "applied_to_shipping": true,
+    "rate": "0.250000",
+    "region": "R_EU",
+    "included_in_prices": true
+  },
+  "name": "VW Store"
+}
