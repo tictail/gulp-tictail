@@ -1,4 +1,5 @@
 request = require 'supertest'
+nock = require 'nock'
 express = require 'express'
 
 storefront = require '../lib/storefront'
@@ -8,6 +9,20 @@ storefront.set 'store_id', 't'
 views = storefront.get 'views'
 views.push __dirname
 storefront.set 'views', views
+
+
+nock('https://api.tictail.com')
+    .get('/v1/stores/t')
+    .replyWithFile(200, __dirname + '/responses/store.json')
+
+nock('https://api.tictail.com')
+    .get('/v1/stores/t/products')
+    .replyWithFile(200, __dirname + '/responses/products.json')
+
+nock('https://api.tictail.com')
+    .get('/v1/stores/t/categories')
+    .replyWithFile(200, __dirname + '/responses/categories.json')
+
 
 describe 'Storefront', ->
   it 'should get /', (done) ->
@@ -30,9 +45,9 @@ describe 'Storefront', ->
       .get('/products/aaa/bbb')
       .expect(200, done)
 
-  it 'should get /product/wrapp-logo-startup-stickers', (done) ->
+  it 'should get /product/3-izettle-logo-stickers-478', (done) ->
     request(storefront)
-      .get('/product/wrapp-logo-startup-stickers')
+      .get('/product/3-izettle-logo-stickers-478')
       .expect(200, done)
 
   it 'should not find /product/aaa', (done) ->

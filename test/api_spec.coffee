@@ -1,8 +1,18 @@
 Q = require 'q'
+nock = require 'nock'
 request = require 'request'
 sinon = require 'sinon'
 
 Api = require '../lib/api'
+
+
+nock('https://api.tictail.com')
+    .get('/v1/stores/px8')
+    .replyWithFile(200, __dirname + '/responses/store.json')
+
+nock('https://api.tictail.com')
+    .get('/v1/stores/0')
+    .reply(400, {})
 
 
 describe 'Api', ->
