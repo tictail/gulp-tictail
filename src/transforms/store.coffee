@@ -1,4 +1,15 @@
 module.exports =
+  searchForm: ->
+    (label, render) ->
+      "<form id=\"tictail_search\" class=\"tictail_form tictail_search\">
+        <input id=\"tictail_search_box\"
+          class=\"tictail_search_box\"
+          name=\"q\"
+          autocomplete=\"off\"
+          type=\"text\"
+          title=\"Search\" />
+      </form>"
+
   transform: (data) ->
     store =
       store_name: data.name
@@ -13,5 +24,7 @@ module.exports =
     if data.logotype
       for size, url of data.logotype[0].sizes
         store.logotype["url-#{size}"] = url
+
+    store.search = module.exports.searchForm
 
     store

@@ -8,6 +8,32 @@ module.exports =
     (label, render) ->
       "<form class=\"tictail_add_to_cart\">#{render(label)}</form>"
 
+  variationsRadio: ->
+    (label, render) ->
+      render "{{#variations}}
+          {{#in_stock}}
+            <input type=\"radio\" name=\"variation_id\"
+              {{#is_default}}checked{{/is_default}}
+              value=\"{{id}}\" id=\"variation_id_{{id}}\"
+              class=\"tictail_radio tictail_variation_radio\">
+            <label for=\"variation_id_{{id}}\"
+              class=\"tictail_label tictail_variation_label\">
+              {{label}}
+            </label>
+          {{/in_stock}}
+        {{/variations}}"
+
+  variationsSelect: ->
+    (label, render) ->
+      render "<select name=\"variation_id\"
+          class=\"tictail_select tictail_variations_select\">
+          {{#variations}}
+            {{#in_stock}}
+              <option value=\"{{id}}\">{{label}}</option>
+            {{/in_stock}}
+          {{/variations}}
+      </select>"
+
   addToCartButton: ->
     (label, render) ->
       "<button type=\"submit\" class=\"tictail_button tictail_add_to_cart_button\">#{render(label)}</button>"
@@ -45,6 +71,10 @@ module.exports =
 
     if product.variations.length is 1
       product.variations = []
+
+    if product.variations.length > 1
+      product.variations_radio = module.exports.variationsRadio
+      product.variations_select = module.exports.variationsSelect
 
     if product.all_images
       product.primary_image = product.all_images[0]

@@ -1,4 +1,9 @@
-{addToCartForm, addToCartButton} = require '../lib/transforms/product'
+{
+  addToCartForm
+  variationsSelect
+  variationsRadio
+  addToCartButton
+} = require '../lib/transforms/product'
 {transform} = require '../lib/transforms/products'
 
 
@@ -228,9 +233,7 @@ describe 'Product transforms', ->
             "url-2000": "https://images.ttcdn.co/media/i/product/67486-1c6a74f6d81e40e4a88f7d45b3d21126.png?size=2000"
           }
         ],
-        "variations": [
-
-        ],
+        "variations": [],
         "primary_image": {
           "url-30": "https://images.ttcdn.co/media/i/product/67486-1c6a74f6d81e40e4a88f7d45b3d21126.png?size=30",
           "url-40": "https://images.ttcdn.co/media/i/product/67486-1c6a74f6d81e40e4a88f7d45b3d21126.png?size=40",
@@ -323,7 +326,9 @@ describe 'Product transforms', ->
           "url-2000": "https://images.ttcdn.co/media/i/product/67486-336838e7176f4c5c8d718af016e11690.jpeg?size=2000"
         },
         "add_to_cart": addToCartForm,
-        "add_to_cart_button": addToCartButton
+        "add_to_cart_button": addToCartButton,
+        "variations_radio": variationsRadio,
+        "variations_select": variationsSelect
       }
     ]
 
