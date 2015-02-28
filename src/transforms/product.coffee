@@ -38,6 +38,25 @@ module.exports =
     (label, render) ->
       "<button type=\"submit\" class=\"tictail_button tictail_add_to_cart_button\">#{render(label)}</button>"
 
+  slideshow: (size) ->
+    ->
+      (label, render) ->
+        render "<div class=\"tictail_slideshow loop\">
+            {{#all_images}}
+              <div class=\"slide image_slide\">
+                <a href=\"{{url-2000}}\" class=\"fullscreen fullscreen_image\"
+                  data-fullscreen-group=\"product-{{id}}-images\">
+                  {{#is_primary}}
+                    <img src=\"{{url-#{size}}}\" alt=\"{{title}}\" itemprop=\"image\"/>
+                  {{/is_primary}}
+                  {{^is_primary}}
+                    <div class=\"image_placeholder\" data-src=\"{{url-#{size}}}\"></div>
+                  {{/is_primary}}
+                </a>
+              </div>
+            {{/all_images}}
+          </div>"
+
   transform: (data) ->
     price = priceToMajor data.price, data.currency
     product =
@@ -78,6 +97,8 @@ module.exports =
 
     if product.all_images
       product.primary_image = product.all_images[0]
+      for size of data.images[0].sizes
+        product["slideshow-#{size}"] = module.exports.slideshow(size)
 
     if not product.out_of_stock
       product.add_to_cart = module.exports.addToCartForm

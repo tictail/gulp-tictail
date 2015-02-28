@@ -3,6 +3,7 @@
   variationsSelect
   variationsRadio
   addToCartButton
+  slideshow
 } = require '../lib/transforms/product'
 {transform} = require '../lib/transforms/products'
 
@@ -247,6 +248,17 @@ describe 'Product transforms', ->
           "url-1000": "https://images.ttcdn.co/media/i/product/67486-1c6a74f6d81e40e4a88f7d45b3d21126.png?size=1000",
           "url-2000": "https://images.ttcdn.co/media/i/product/67486-1c6a74f6d81e40e4a88f7d45b3d21126.png?size=2000"
         },
+        "slideshow-30": slideshow(0),
+        "slideshow-40": slideshow(0),
+        "slideshow-45": slideshow(0),
+        "slideshow-50": slideshow(0),
+        "slideshow-75": slideshow(0),
+        "slideshow-100": slideshow(0),
+        "slideshow-300": slideshow(0),
+        "slideshow-500": slideshow(0),
+        "slideshow-640": slideshow(0),
+        "slideshow-1000": slideshow(0),
+        "slideshow-2000": slideshow(0),
         "add_to_cart": addToCartForm,
         "add_to_cart_button": addToCartButton
       },
@@ -325,6 +337,17 @@ describe 'Product transforms', ->
           "url-1000": "https://images.ttcdn.co/media/i/product/67486-336838e7176f4c5c8d718af016e11690.jpeg?size=1000",
           "url-2000": "https://images.ttcdn.co/media/i/product/67486-336838e7176f4c5c8d718af016e11690.jpeg?size=2000"
         },
+        "slideshow-30": slideshow(0),
+        "slideshow-40": slideshow(0),
+        "slideshow-45": slideshow(0),
+        "slideshow-50": slideshow(0),
+        "slideshow-75": slideshow(0),
+        "slideshow-100": slideshow(0),
+        "slideshow-300": slideshow(0),
+        "slideshow-500": slideshow(0),
+        "slideshow-640": slideshow(0),
+        "slideshow-1000": slideshow(0),
+        "slideshow-2000": slideshow(0),
         "add_to_cart": addToCartForm,
         "add_to_cart_button": addToCartButton,
         "variations_radio": variationsRadio,
