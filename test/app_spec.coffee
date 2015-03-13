@@ -16,7 +16,7 @@ nock('https://api.tictail.com')
     .replyWithFile(200, __dirname + '/responses/store.json')
 
 nock('https://api.tictail.com')
-    .get('/v1/stores/t/products')
+    .get('/v1/stores/t/products?order_by=position')
     .replyWithFile(200, __dirname + '/responses/products.json')
 
 nock('https://api.tictail.com')
