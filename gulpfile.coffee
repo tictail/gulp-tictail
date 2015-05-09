@@ -14,4 +14,6 @@ gulp.task 'mustache', ->
 gulp.task 'watch', ->
   gulp.watch './src/**/*', ['coffee', 'mustache']
 
-gulp.task 'default', ['coffee', 'mustache', 'watch']
+gulp.task 'build', ['coffee', 'mustache']
+
+gulp.task 'default', ['build', 'watch']

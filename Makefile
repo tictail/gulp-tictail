@@ -6,7 +6,7 @@ clean:
 	rm -rf lib
 
 build: clean
-	coffee -o lib -c src
+	gulp build
 
 test: build
 	mocha
