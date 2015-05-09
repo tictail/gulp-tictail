@@ -208,7 +208,7 @@ describe 'Product transforms', ->
       {
         "title": "VW Kleinbus",
         "description": "<h3>Jaja.</h3>\n\nEn skön buss.\n\n<del>asd</del>",
-        "url": "product/vw-kleinbus",
+        "url": "/product/vw-kleinbus",
         "absolute_url": "/product/vw-kleinbus",
         "identifier": "4XfN",
         "price": "0.00 SEK",
@@ -265,7 +265,7 @@ describe 'Product transforms', ->
       {
         "title": "Another cars",
         "description": "This one is another.",
-        "url": "product/another-car",
+        "url": "/product/another-car",
         "absolute_url": "/product/another-car",
         "identifier": "54V8",
         "price": "0.00 SEK",

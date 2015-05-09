@@ -92,7 +92,7 @@ describe 'Product transforms', ->
     expected =
       "title": "VW Kleinbus",
       "description": "<h3>Jaja.</h3>\n\nEn skön buss.\n\n<del>asd</del>",
-      "url": "product/vw-kleinbus",
+      "url": "/product/vw-kleinbus",
       "absolute_url": "/product/vw-kleinbus",
       "identifier": "4XfN",
       "price": "0.00 SEK",

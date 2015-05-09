@@ -62,7 +62,7 @@ module.exports =
     product =
       title: data.title
       description: data.description
-      url: "product/#{data.slug}"
+      url: "/product/#{data.slug}"
       absolute_url: "/product/#{data.slug}"
       identifier: data.id,
       price: "#{price.toFixed(2)} #{data.currency}"
