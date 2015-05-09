@@ -6,56 +6,58 @@ _ = require 'lodash'
 module.exports =
   addToCartForm: ->
     (label, render) ->
-      "<form class=\"tictail_add_to_cart\">#{render(label)}</form>"
+      """<form class="tictail_add_to_cart">#{render(label)}</form>"""
 
   variationsRadio: ->
     (label, render) ->
-      render "{{#variations}}
+      render """{{#variations}}
           {{#in_stock}}
-            <input type=\"radio\" name=\"variation_id\"
+            <input type="radio" name="variation_id"
               {{#is_default}}checked{{/is_default}}
-              value=\"{{id}}\" id=\"variation_id_{{id}}\"
-              class=\"tictail_radio tictail_variation_radio\">
-            <label for=\"variation_id_{{id}}\"
-              class=\"tictail_label tictail_variation_label\">
+              value="{{id}}" id="variation_id_{{id}}"
+              class="tictail_radio tictail_variation_radio">
+            <label for="variation_id_{{id}}"
+              class="tictail_label tictail_variation_label">
               {{label}}
             </label>
           {{/in_stock}}
-        {{/variations}}"
+        {{/variations}}"""
 
   variationsSelect: ->
     (label, render) ->
-      render "<select name=\"variation_id\"
-          class=\"tictail_select tictail_variations_select\">
+      render """<select name="variation_id"
+          class="tictail_select tictail_variations_select">
           {{#variations}}
             {{#in_stock}}
-              <option value=\"{{id}}\">{{label}}</option>
+              <option value="{{id}}">{{label}}</option>
             {{/in_stock}}
           {{/variations}}
-      </select>"
+      </select>"""
 
   addToCartButton: ->
     (label, render) ->
-      "<button type=\"submit\" class=\"tictail_button tictail_add_to_cart_button\">#{render(label)}</button>"
+      """<button type="submit" class="tictail_button tictail_add_to_cart_button">
+          #{render(label)}
+      </button>"""
 
   slideshow: (size) ->
     ->
       (label, render) ->
-        render "<div class=\"tictail_slideshow loop\">
+        render """<div class="tictail_slideshow loop">
             {{#all_images}}
-              <div class=\"slide image_slide\">
-                <a href=\"{{url-2000}}\" class=\"fullscreen fullscreen_image\"
-                  data-fullscreen-group=\"product-{{id}}-images\">
+              <div class="slide image_slide">
+                <a href="{{url-2000}}" class="fullscreen fullscreen_image"
+                  data-fullscreen-group="product-{{id}}-images">
                   {{#is_primary}}
-                    <img src=\"{{url-#{size}}}\" alt=\"{{title}}\" itemprop=\"image\"/>
+                    <img src="{{url-#{size}}}" alt="{{title}}" itemprop="image"/>
                   {{/is_primary}}
                   {{^is_primary}}
-                    <div class=\"image_placeholder\" data-src=\"{{url-#{size}}}\"></div>
+                    <div class="image_placeholder" data-src="{{url-#{size}}}"></div>
                   {{/is_primary}}
                 </a>
               </div>
             {{/all_images}}
-          </div>"
+          </div>"""
 
   transform: (data) ->
     price = priceToMajor data.price, data.currency
