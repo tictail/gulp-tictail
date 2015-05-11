@@ -1,6 +1,7 @@
 _ = require 'lodash'
 
 {priceToMajor} = require '../util'
+{facebookLikeButton, twitterTweetButton} = require './store'
 
 
 module.exports =
@@ -32,13 +33,13 @@ module.exports =
               <option value="{{id}}">{{label}}</option>
             {{/in_stock}}
           {{/variations}}
-      </select>"""
+        </select>"""
 
   addToCartButton: ->
     (label, render) ->
       """<button type="submit" class="tictail_button tictail_add_to_cart_button">
           #{render(label)}
-      </button>"""
+        </button>"""
 
   slideshow: (size) ->
     ->
@@ -58,6 +59,9 @@ module.exports =
               </div>
             {{/all_images}}
           </div>"""
+
+  pinterestPinItButton: ->
+    ->
 
   transform: (data) ->
     price = priceToMajor data.price, data.currency
@@ -105,5 +109,10 @@ module.exports =
     if not product.out_of_stock
       product.add_to_cart = module.exports.addToCartForm
       product.add_to_cart_button = module.exports.addToCartButton
+
+    product.facebook_like_button = facebookLikeButton product.absolute_url
+
+    product.twitter_tweet_button = twitterTweetButton product.absolute_url,
+      "Worth checking out! #{product.title} sold by #{data.store_name} via @tictail"
 
     product

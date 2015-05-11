@@ -4,6 +4,10 @@
   addToCartButton
   slideshow
 } = require '../lib/transforms/product'
+{
+  facebookLikeButton
+  twitterTweetButton
+} = require '../lib/transforms/store'
 
 
 describe 'Product transforms', ->
@@ -145,5 +149,7 @@ describe 'Product transforms', ->
       "slideshow-2000": slideshow(0),
       "add_to_cart": addToCartForm,
       "add_to_cart_button": addToCartButton,
+      "facebook_like_button": facebookLikeButton(),
+      "twitter_tweet_button": twitterTweetButton(),
 
     transform(data).should.eql(expected)

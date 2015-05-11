@@ -6,6 +6,10 @@
   slideshow
 } = require '../lib/transforms/product'
 {transform} = require '../lib/transforms/products'
+{
+  facebookLikeButton
+  twitterTweetButton
+} = require '../lib/transforms/store'
 
 
 describe 'Product transforms', ->
@@ -260,7 +264,9 @@ describe 'Product transforms', ->
         "slideshow-1000": slideshow(0),
         "slideshow-2000": slideshow(0),
         "add_to_cart": addToCartForm,
-        "add_to_cart_button": addToCartButton
+        "add_to_cart_button": addToCartButton,
+        "facebook_like_button": facebookLikeButton(),
+        "twitter_tweet_button": twitterTweetButton(),
       },
       {
         "title": "Another cars",
@@ -351,7 +357,9 @@ describe 'Product transforms', ->
         "add_to_cart": addToCartForm,
         "add_to_cart_button": addToCartButton,
         "variations_radio": variationsRadio,
-        "variations_select": variationsSelect
+        "variations_select": variationsSelect,
+        "facebook_like_button": facebookLikeButton(),
+        "twitter_tweet_button": twitterTweetButton(),
       }
     ]
 
