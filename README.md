@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/tictail/gulp-tictail.svg?branch=master)](https://travis-ci.org/tictail/gulp-tictail)
 
-Gulp target for simplifying Tictail theme creation.
+Gulp target for simplifying Tictail theme creation. Please note that this is beta quality software, some template tags are not yet implemented.
 
 
 ### Installation
