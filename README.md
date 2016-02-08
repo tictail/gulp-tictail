@@ -41,7 +41,7 @@ For an opinionated development setup using `gulp-tictail`, see [theme-example](h
 
 The `serve` method takes the following config options as a object:
 
-* `store_id` — The store to fetch data (products etc.) from.
+* `store_id` — The store to fetch data (products etc.) from. Note that this store must be put online.
 * `port` — The desired port to listen on. Defaults to `5555`.
 * `src` — Path to theme source (theme.mustache) and partials. Defaults to `"./src"`.
 * `dist` — Path to static assets (images, CSS etc.) used in theme. Defaults to `"./dist"`.
