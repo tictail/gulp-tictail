@@ -1,4 +1,5 @@
-PATH := ./node_modules/.bin:${PATH}
+export PATH := $(shell npm bin):$(PATH)
+SHELL := /bin/bash
 
 .PHONY : clean build test publish
 
