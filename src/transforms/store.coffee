@@ -13,8 +13,8 @@ module.exports =
       store_identifier: data.id
       logotype: _.map data.logotype, (image) ->
         images = {}
-        for size, url of image.sizes
-          images["url-#{size}"] = url
+        for size in [100, 1000, 2000, 30, 300, 40, 45, 50, 500, 640, 75]
+          images["url-#{size}"] = "#{image.url}?size=#{size}"
         images
 
     store

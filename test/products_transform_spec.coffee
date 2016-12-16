@@ -1,4 +1,4 @@
-{addToCartForm, addToCartButton} = require '../lib/transforms/product'
+{addToCartForm, addToCartButton, priceTag} = require '../lib/transforms/product'
 {transform} = require '../lib/transforms/products'
 
 
@@ -87,6 +87,8 @@ describe 'Product transforms', ->
         }
       ],
       "quantity": null
+      "sale_active": true
+      "sale_price": 5600
     }, {
       "status": "published",
       "store_url": "http://blackgoldenretriever.tictail.com",
@@ -196,6 +198,7 @@ describe 'Product transforms', ->
         }
       ],
       "quantity": 3
+      "sale_active": false
     }]
 
     expected = [
@@ -207,7 +210,8 @@ describe 'Product transforms', ->
         "identifier": "4XfN",
         "price": "0.00 SEK",
         "price_without_currency": 0,
-        "price_with_currency": "0 SEK",
+        "price_with_currency": priceTag(),
+        "price_tag": priceTag(),
         "currency_code": "SEK",
         "quantity_sum": null,
         "is_quantity_unlimited": true,
@@ -245,7 +249,8 @@ describe 'Product transforms', ->
           "url-2000": "https://images.ttcdn.co/media/i/product/67486-1c6a74f6d81e40e4a88f7d45b3d21126.png?size=2000"
         },
         "add_to_cart": addToCartForm,
-        "add_to_cart_button": addToCartButton
+        "add_to_cart_button": addToCartButton,
+        "sale_active": true
       },
       {
         "title": "Another cars",
@@ -255,7 +260,8 @@ describe 'Product transforms', ->
         "identifier": "54V8",
         "price": "0.00 SEK",
         "price_without_currency": 0,
-        "price_with_currency": "0 SEK",
+        "price_with_currency": priceTag(),
+        "price_tag": priceTag(),
         "currency_code": "SEK",
         "quantity_sum": 3,
         "is_quantity_unlimited": false,
@@ -323,7 +329,8 @@ describe 'Product transforms', ->
           "url-2000": "https://images.ttcdn.co/media/i/product/67486-336838e7176f4c5c8d718af016e11690.jpeg?size=2000"
         },
         "add_to_cart": addToCartForm,
-        "add_to_cart_button": addToCartButton
+        "add_to_cart_button": addToCartButton,
+        "sale_active": false
       }
     ]
 

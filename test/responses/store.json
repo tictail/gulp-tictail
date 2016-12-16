@@ -21,19 +21,7 @@
             "modified_at": "2014-11-22T18:17:22.000000",
             "original_height": 2448,
             "original_width": 3264,
-            "sizes": {
-                "100": "https://images.ttcdn.co/media/i/logotype/67486-5ada0157d6fc422685fb2a58b9adc4b9.jpeg?size=100",
-                "1000": "https://images.ttcdn.co/media/i/logotype/67486-5ada0157d6fc422685fb2a58b9adc4b9.jpeg?size=1000",
-                "2000": "https://images.ttcdn.co/media/i/logotype/67486-5ada0157d6fc422685fb2a58b9adc4b9.jpeg?size=2000",
-                "30": "https://images.ttcdn.co/media/i/logotype/67486-5ada0157d6fc422685fb2a58b9adc4b9.jpeg?size=30",
-                "300": "https://images.ttcdn.co/media/i/logotype/67486-5ada0157d6fc422685fb2a58b9adc4b9.jpeg?size=300",
-                "40": "https://images.ttcdn.co/media/i/logotype/67486-5ada0157d6fc422685fb2a58b9adc4b9.jpeg?size=40",
-                "45": "https://images.ttcdn.co/media/i/logotype/67486-5ada0157d6fc422685fb2a58b9adc4b9.jpeg?size=45",
-                "50": "https://images.ttcdn.co/media/i/logotype/67486-5ada0157d6fc422685fb2a58b9adc4b9.jpeg?size=50",
-                "500": "https://images.ttcdn.co/media/i/logotype/67486-5ada0157d6fc422685fb2a58b9adc4b9.jpeg?size=500",
-                "640": "https://images.ttcdn.co/media/i/logotype/67486-5ada0157d6fc422685fb2a58b9adc4b9.jpeg?size=640",
-                "75": "https://images.ttcdn.co/media/i/logotype/67486-5ada0157d6fc422685fb2a58b9adc4b9.jpeg?size=75"
-            },
+            "sizes": null,
             "url": "https://images.ttcdn.co/media/i/logotype/67486-5ada0157d6fc422685fb2a58b9adc4b9.jpeg"
         }
     ],

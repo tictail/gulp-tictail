@@ -12,17 +12,33 @@ module.exports =
     (label, render) ->
       "<button type=\"submit\" class=\"tictail_button tictail_add_to_cart_button\">#{render(label)}</button>"
 
+  formatPrice: (price, currency) ->
+    "#{price.toFixed(2)} #{currency}"
+
+  priceTag: (price, originalPrice, saleActive) ->
+    ->
+      return price unless saleActive
+      """<span class="price_tag"><span class="original_price"
+        style="text-decoration: line-through">#{originalPrice}</span> <span
+        class="sale_price">#{price}</span></span>"""
+
   transform: (data) ->
     price = priceToMajor data.price, data.currency
+    priceFormatted = module.exports.formatPrice price, data.currency
+    originalPrice = priceToMajor data.original_price, data.currency
+    originalPriceFormatted = module.exports.formatPrice originalPrice, data.currency
+    priceTag = module.exports.priceTag priceFormatted, originalPriceFormatted, data.sale_active
     product =
       title: data.title
       description: data.description
       url: "product/#{data.slug}"
       absolute_url: "/product/#{data.slug}"
       identifier: data.id,
-      price: "#{price.toFixed(2)} #{data.currency}"
-      price_without_currency: price,
-      price_with_currency: "#{price} #{data.currency}"
+      price: priceFormatted
+      price_without_currency: price
+      price_tag: priceTag
+      price_with_currency: priceTag
+      sale_active: data.sale_active
       currency_code: data.currency
       quantity_sum: data.quantity
       is_quantity_unlimited: data.unlimited
