@@ -85,6 +85,7 @@ describe 'Product transforms', ->
       "quantity": null
       "sale_active": true
       "sale_price": 5600
+      "original_price": 14500
 
     expected =
       "title": "VW Kleinbus",
@@ -92,7 +93,7 @@ describe 'Product transforms', ->
       "url": "product/vw-kleinbus",
       "absolute_url": "/product/vw-kleinbus",
       "identifier": "4XfN",
-      "price": "0.00 SEK",
+      "price": '0.00 <span class=\"currency currency_sek\">SEK</span>',
       "price_tag": priceTag(),
       "price_without_currency": 0,
       "price_with_currency": priceTag(),
@@ -136,4 +137,10 @@ describe 'Product transforms', ->
       "add_to_cart_button": addToCartButton,
       "sale_active": true
 
-    transform(data).should.eql(expected)
+    transformedProduct = transform(data)
+
+    transformedProduct.should.eql(expected)
+
+    transformedProduct.price_tag().should.eql('''<span class="price_tag"><span class="original_price"
+      style="text-decoration: line-through">145.00 <span class="currency currency_sek">SEK</span></span> <span
+      class="sale_price">0.00 <span class="currency currency_sek">SEK</span></span></span>''')

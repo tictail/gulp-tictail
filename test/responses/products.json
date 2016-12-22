@@ -71,7 +71,8 @@
     ],
     "quantity": 0,
     "sale_active": true,
-    "sale_price": 5600
+    "sale_price": 5600,
+    "original_price": 14500
   },
   {
     "status": "published",

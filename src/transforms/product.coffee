@@ -13,7 +13,7 @@ module.exports =
       "<button type=\"submit\" class=\"tictail_button tictail_add_to_cart_button\">#{render(label)}</button>"
 
   formatPrice: (price, currency) ->
-    "#{price.toFixed(2)} #{currency}"
+    "#{price.toFixed(2)} <span class=\"currency currency_#{currency.toLowerCase()}\">#{currency}</span>"
 
   priceTag: (price, originalPrice, saleActive) ->
     ->
