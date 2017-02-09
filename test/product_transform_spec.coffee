@@ -1,4 +1,4 @@
-{transform, addToCartForm, addToCartButton} = require '../lib/transforms/product'
+{transform, addToCartForm, addToCartButton, priceTag} = require '../lib/transforms/product'
 
 
 describe 'Product transforms', ->
@@ -83,6 +83,9 @@ describe 'Product transforms', ->
         }
       ],
       "quantity": null
+      "sale_active": true
+      "sale_price": 5600
+      "original_price": 14500
 
     expected =
       "title": "VW Kleinbus",
@@ -90,9 +93,10 @@ describe 'Product transforms', ->
       "url": "product/vw-kleinbus",
       "absolute_url": "/product/vw-kleinbus",
       "identifier": "4XfN",
-      "price": "0.00 SEK",
+      "price": '0.00 <span class=\"currency currency_sek\">SEK</span>',
+      "price_tag": priceTag(),
       "price_without_currency": 0,
-      "price_with_currency": "0 SEK",
+      "price_with_currency": priceTag(),
       "currency_code": "SEK",
       "quantity_sum": null,
       "is_quantity_unlimited": true,
@@ -130,6 +134,13 @@ describe 'Product transforms', ->
         "url-2000": "https://images.ttcdn.co/media/i/product/67486-1c6a74f6d81e40e4a88f7d45b3d21126.png?size=2000"
       },
       "add_to_cart": addToCartForm,
-      "add_to_cart_button": addToCartButton
+      "add_to_cart_button": addToCartButton,
+      "sale_active": true
 
-    transform(data).should.eql(expected)
+    transformedProduct = transform(data)
+
+    transformedProduct.should.eql(expected)
+
+    transformedProduct.price_tag().should.eql('''<span class="price_tag"><span class="original_price"
+      style="text-decoration: line-through">145.00 <span class="currency currency_sek">SEK</span></span> <span
+      class="sale_price">0.00 <span class="currency currency_sek">SEK</span></span></span>''')

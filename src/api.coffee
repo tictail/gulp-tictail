@@ -4,7 +4,7 @@ HTTPError = require 'node-http-error'
 
 
 module.exports = class Api
-  base: "https://api.tictail.com/v1"
+  base: "https://api.tictail.com/v1.10"
 
   constructor: ->
     @promises = {}
