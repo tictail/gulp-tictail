@@ -22,12 +22,27 @@ module.exports =
         style="text-decoration: line-through">#{originalPrice}</span> <span
         class="sale_price">#{price}</span></span>"""
 
+  variationsSelect: (numVariations) ->
+    return if numVariations <= 1
+    ->
+      (_, render) ->
+        render """
+          <select name="variation_id" class="tictail_select tictail_variations_select">
+            {{#variations}}
+              {{#in_stock}}
+                <option value="{{id}}">{{label}}</option>
+              {{/in_stock}}
+            {{/variations}}
+          </select>
+        """
+
   transform: (data) ->
     price = priceToMajor data.price, data.currency
     priceFormatted = module.exports.formatPrice price, data.currency
     originalPrice = priceToMajor data.original_price, data.currency
     originalPriceFormatted = module.exports.formatPrice originalPrice, data.currency
     priceTag = module.exports.priceTag priceFormatted, originalPriceFormatted, data.sale_active
+    variationsSelect = module.exports.variationsSelect data.variations.length
     product =
       title: data.title
       description: data.description
@@ -58,6 +73,7 @@ module.exports =
         is_default: false
         in_stock: variation.quantity || variation.unlimited
         out_of_stock: !variation.quantity && !variation.unlimited
+      variations_select: variationsSelect
 
     if product.variations.length is 1
       product.variations = []
