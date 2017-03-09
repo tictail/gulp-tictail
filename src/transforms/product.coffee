@@ -5,12 +5,12 @@ _ = require 'lodash'
 
 module.exports =
   addToCartForm: ->
-    (label, render) ->
-      "<form class=\"tictail_add_to_cart\">#{render(label)}</form>"
+    (value, render) ->
+      "<form class=\"tictail_add_to_cart\">#{render(value)}</form>"
 
   addToCartButton: ->
-    (label, render) ->
-      "<button type=\"submit\" class=\"tictail_button tictail_add_to_cart_button\">#{render(label)}</button>"
+    (value, render) ->
+      "<button type=\"submit\" class=\"tictail_button tictail_add_to_cart_button\">#{render(value)}</button>"
 
   formatPrice: (price, currency) ->
     "#{price.toFixed(2)} <span class=\"currency currency_#{currency.toLowerCase()}\">#{currency}</span>"

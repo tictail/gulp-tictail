@@ -2,6 +2,16 @@ _ = require 'lodash'
 
 
 module.exports =
+  legalLink: (type, store_url) ->
+    (value, render) ->
+      render """
+        <a rel="nofollow" class="tictail_#{type} fullscreen fullscreen_iframe"
+          data-fullscreen-group="tictail_#{type}" data-fullscreen-no-repeat
+          href="#{store_url}/legal/#{type}">
+          #{value}
+        </a>
+      """
+
   search: ->
     """
     <form id="tictail_search" class="tictail_form tictail_search">
@@ -32,6 +42,8 @@ module.exports =
         for size in [640, 1000, 2000]
           images["url-#{size}"] = "#{data.wallpapers.iphone.url}?w=#{size}"
         images
+      terms: -> module.exports.legalLink 'terms', data.url
+      return_policy: -> module.exports.legalLink 'return-policy', data.url
       search: module.exports.search
 
     store
