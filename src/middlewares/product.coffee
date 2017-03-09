@@ -21,6 +21,8 @@ module.exports = (req, res, next) ->
         product_page:
           product:
             transforms.product.transform datum
+          related_products:
+            _.map(_.sampleSize(data, 3), transforms.product.transform)
   )
 
   next()
