@@ -46,8 +46,8 @@ module.exports =
       out_of_stock: !data.quantity && !data.unlimited
       all_images: _.map data.images, (image) ->
         images = {}
-        for size, url of image.sizes
-          images["url-#{size}"] = url
+        for size in [100, 1000, 2000, 30, 300, 40, 45, 50, 500, 640, 75]
+          images["url-#{size}"] = "#{image.url}?w=#{size}"
         images
       variations: _.map data.variations, (variation) ->
         return false if not variation.title

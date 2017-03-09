@@ -14,7 +14,12 @@ module.exports =
       logotype: _.map data.logotype, (image) ->
         images = {}
         for size in [100, 1000, 2000, 30, 300, 40, 45, 50, 500, 640, 75]
-          images["url-#{size}"] = "#{image.url}?size=#{size}"
+          images["url-#{size}"] = "#{image.url}?w=#{size}"
+        images
+      wallpaper: ->
+        images = {}
+        for size in [640, 1000, 2000]
+          images["url-#{size}"] = "#{data.wallpapers.iphone.url}?w=#{size}"
         images
 
     store
