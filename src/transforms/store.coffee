@@ -2,6 +2,17 @@ _ = require 'lodash'
 
 
 module.exports =
+  search: ->
+    """
+    <form id="tictail_search" class="tictail_form tictail_search">
+        <span class="tictail_search_border" style="display:none">
+          Search
+        </span>
+        <input id="tictail_search_box" class="tictail_search_box" name="q" autocomplete="off"
+          type="text" title="Search" />
+    </form>
+    """
+
   transform: (data) ->
     store =
       store_name: data.name
@@ -21,5 +32,6 @@ module.exports =
         for size in [640, 1000, 2000]
           images["url-#{size}"] = "#{data.wallpapers.iphone.url}?w=#{size}"
         images
+      search: module.exports.search
 
     store
