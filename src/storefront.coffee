@@ -10,9 +10,9 @@ app.set 'views', [__dirname + '/views']
 app.set 'api', new Api()
 app.disable 'etag'
 
-{boot, partials, store, search, navigation, start, products, product, page, render} = require './middlewares'
+{boot, misc, partials, store, search, navigation, start, products, product, page, render} = require './middlewares'
 
-app.use boot, partials, store, navigation
+app.use boot, partials, misc, store, navigation
 app.get '/', start, products
 app.get '/products', products
 app.get '/products/:slug/:slug?', products
