@@ -51,8 +51,6 @@ The `serve` method takes the following config options as an object:
 
 ```bash
 $ git clone https://github.com/tictail/gulp-tictail .
-$ npm install coffee-script -g
-$ npm install mocha -g
 $ npm install
 $ make test
 ```
