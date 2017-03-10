@@ -19,3 +19,4 @@ test: build
 
 publish: clean build
 	npm publish
+	git push origin --tags
