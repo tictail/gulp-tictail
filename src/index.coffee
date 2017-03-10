@@ -4,7 +4,6 @@ util = require 'gulp-util'
 
 storefront = require './storefront'
 fs = require 'fs'
-through = require 'through'
 
 
 module.exports =
@@ -56,6 +55,7 @@ module.exports =
         fs.readFileSync("#{config.src}/#{partial}.mustache").toString()
       )
 
+    fs.mkdirSync(config.dist) unless fs.existsSync(config.dist)
     fs.writeFileSync "#{config.dist}/theme.mustache", theme
     util.log "Theme written to #{config.dist}/theme.mustache"
 
