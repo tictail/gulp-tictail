@@ -7,11 +7,11 @@ Api = require '../lib/api'
 
 
 nock('https://api.tictail.com')
-    .get('/v1.10/stores/t')
+    .get('/v1.23/stores/t')
     .replyWithFile(200, __dirname + '/responses/store.json')
 
 nock('https://api.tictail.com')
-    .get('/v1.10/stores/0')
+    .get('/v1.23/stores/0')
     .reply(400, {})
 
 
