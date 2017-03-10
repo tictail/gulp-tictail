@@ -39,7 +39,7 @@ For an opinionated development setup using `gulp-tictail`, see [theme-example](h
 
 ### Options
 
-The `serve` method takes the following config options as a object:
+The `serve` method takes the following config options as an object:
 
 * `store_id` — The store to fetch data (products etc.) from. Note that this store must be put online.
 * `port` — The desired port to listen on. Defaults to `5555`.
