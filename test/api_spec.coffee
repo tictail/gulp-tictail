@@ -7,7 +7,7 @@ Api = require '../lib/api'
 
 
 nock('https://api.tictail.com')
-    .get('/v1.10/stores/px8')
+    .get('/v1.10/stores/t')
     .replyWithFile(200, __dirname + '/responses/store.json')
 
 nock('https://api.tictail.com')
@@ -18,7 +18,7 @@ nock('https://api.tictail.com')
 describe 'Api', ->
   it 'should get an endpoint', ->
     api = new Api()
-    api.get("stores/px8").then((data) ->
+    api.get("stores/t").then((data) ->
       data.constructor.should.eql(Object)
     )
 
@@ -32,8 +32,8 @@ describe 'Api', ->
 
     api = new Api()
 
-    api.get("stores/px8").then(->
-      api.get("stores/px8").then(->
+    api.get("stores/t").then(->
+      api.get("stores/t").then(->
         request.get.callCount.should.eql 1
         request.get.restore()
       )

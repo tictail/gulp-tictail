@@ -50,9 +50,9 @@ describe 'Storefront', ->
       .get('/product/3-izettle-logo-stickers-478')
       .expect(200, done)
 
-  it 'should not find /product/aaa', (done) ->
+  it 'should not find /product/aaa123', (done) ->
     request(storefront)
-      .get('/product/aaa')
+      .get('/product/aaa123')
       .expect(404, done)
 
   it 'should get /about', (done) ->
