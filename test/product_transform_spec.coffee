@@ -1,146 +1,78 @@
-{transform, addToCartForm, addToCartButton, priceTag} = require '../lib/transforms/product'
+{transform, addToCartForm, addToCartButton, priceTag, variationsSelect} = require '../lib/transforms/product'
+data = require('./responses/products')[3]
 
 
 describe 'Product transforms', ->
   it 'should transform a product', ->
-    data =
-      "status": "published",
-      "store_url": "http://blackgoldenretriever.tictail.com",
-      "description": "<h3>Jaja.</h3>\n\nEn sk\u00f6n buss.\n\n<del>asd</del>",
-      "store_name": "VW Store",
-      "store_id": "px8",
-      "unlimited": true,
-      "created_at": "2013-09-15T09:25:22",
-      "title": "VW Kleinbus",
-      "modified_at": "2014-12-17T11:17:16",
-      "slug": "vw-kleinbus",
-      "price": 0,
-      "currency": "SEK",
-      "variations": [
-        {
-          "title": null,
-          "modified_at": "2013-11-13T07:56:14",
-          "created_at": "2013-09-15T09:25:22",
-          "unlimited": true,
-          "id": "6vmw",
-          "quantity": null
-        }
-      ],
-      "images": [
-        {
-          "original_height": 608,
-          "sizes": {
-            "2000": "https://images.ttcdn.co/media/i/product/67486-1c6a74f6d81e40e4a88f7d45b3d21126.png?size=2000",
-            "30": "https://images.ttcdn.co/media/i/product/67486-1c6a74f6d81e40e4a88f7d45b3d21126.png?size=30",
-            "300": "https://images.ttcdn.co/media/i/product/67486-1c6a74f6d81e40e4a88f7d45b3d21126.png?size=300",
-            "45": "https://images.ttcdn.co/media/i/product/67486-1c6a74f6d81e40e4a88f7d45b3d21126.png?size=45",
-            "50": "https://images.ttcdn.co/media/i/product/67486-1c6a74f6d81e40e4a88f7d45b3d21126.png?size=50",
-            "40": "https://images.ttcdn.co/media/i/product/67486-1c6a74f6d81e40e4a88f7d45b3d21126.png?size=40",
-            "640": "https://images.ttcdn.co/media/i/product/67486-1c6a74f6d81e40e4a88f7d45b3d21126.png?size=640",
-            "75": "https://images.ttcdn.co/media/i/product/67486-1c6a74f6d81e40e4a88f7d45b3d21126.png?size=75",
-            "100": "https://images.ttcdn.co/media/i/product/67486-1c6a74f6d81e40e4a88f7d45b3d21126.png?size=100",
-            "500": "https://images.ttcdn.co/media/i/product/67486-1c6a74f6d81e40e4a88f7d45b3d21126.png?size=500",
-            "1000": "https://images.ttcdn.co/media/i/product/67486-1c6a74f6d81e40e4a88f7d45b3d21126.png?size=1000"
-          },
-          "url": "https://images.ttcdn.co/media/i/product/67486-1c6a74f6d81e40e4a88f7d45b3d21126.png",
-          "created_at": "2013-09-15T09:25:22",
-          "modified_at": "2013-09-15T09:25:22",
-          "original_width": 944,
-          "id": "8kgD"
-        }
-      ],
-      "id": "4XfN",
-      "categories": [
-        {
-          "title": "Plastic",
-          "created_at": "2014-11-22T09:37:48",
-          "modified_at": null,
-          "slug": "plastic",
-          "parent_id": null,
-          "product_count": 2,
-          "position": 2,
-          "id": "WZj"
-        },
-        {
-          "title": "Test",
-          "created_at": "2014-11-22T09:37:48",
-          "modified_at": null,
-          "slug": "test",
-          "parent_id": null,
-          "product_count": 1,
-          "position": 1,
-          "id": "57Vr"
-        },
-        {
-          "title": "Foo",
-          "created_at": "2014-11-22T09:37:22",
-          "modified_at": null,
-          "slug": "foo",
-          "parent_id": "57Vr",
-          "product_count": 1,
-          "position": 5,
-          "id": "57Vt"
-        }
-      ],
-      "quantity": null
-      "sale_active": true
-      "sale_price": 5600
-      "original_price": 14500
-
     expected =
-      "title": "VW Kleinbus",
-      "description": "<h3>Jaja.</h3>\n\nEn skön buss.\n\n<del>asd</del>",
-      "url": "product/vw-kleinbus",
-      "absolute_url": "/product/vw-kleinbus",
-      "identifier": "4XfN",
-      "price": '0.00 <span class=\"currency currency_sek\">SEK</span>',
-      "price_tag": priceTag(),
-      "price_without_currency": 0,
-      "price_with_currency": priceTag(),
-      "currency_code": "SEK",
-      "quantity_sum": null,
-      "is_quantity_unlimited": true,
-      "in_stock": true,
-      "out_of_stock": false,
-      "all_images": [
+      title: 'Logo Sticker Mix Pack'
+      description: "Be like <a rel=\"nofollow\" target=\"_blank\" href=\"http://www.svd.se/naringsliv/svenska-it-hopp-ska-erovra-varlden_6841413.svd\">Ted Valentin</a> and rock the whole scene!\n<br /><br />\n1 x Bloglovin <br />1 x Filibaba<br />\n1 x GuidePal<br />\n1 x iZettle<br />\n1 x Klarna <br />\n1 x Kundo <br />\n1 x Readmill  <br />\n1 x Spotify <br />\n1 x The Startup Store  <br />\n1 x Tictail<br />\n1 x Tripbirds  <br /> \n1 x Tripl  <br /> \n1 x Wrapp\n<br /><br />\n<i>Macbook not included :)</i>"
+      url: 'product/logo-sticker-mix-pack-482'
+      absolute_url: '/product/logo-sticker-mix-pack-482'
+      identifier: 'aC'
+      price: '35.00 <span class="currency currency_sek">SEK</span>'
+      price_tag: priceTag()
+      price_without_currency: 35
+      price_with_currency: priceTag()
+      currency_code: "SEK"
+      quantity_sum: null
+      is_quantity_unlimited: true
+      in_stock: true
+      out_of_stock: false
+      all_images: [
         {
-          "url-30": "https://images.ttcdn.co/media/i/product/67486-1c6a74f6d81e40e4a88f7d45b3d21126.png?size=30",
-          "url-40": "https://images.ttcdn.co/media/i/product/67486-1c6a74f6d81e40e4a88f7d45b3d21126.png?size=40",
-          "url-45": "https://images.ttcdn.co/media/i/product/67486-1c6a74f6d81e40e4a88f7d45b3d21126.png?size=45",
-          "url-50": "https://images.ttcdn.co/media/i/product/67486-1c6a74f6d81e40e4a88f7d45b3d21126.png?size=50",
-          "url-75": "https://images.ttcdn.co/media/i/product/67486-1c6a74f6d81e40e4a88f7d45b3d21126.png?size=75",
-          "url-100": "https://images.ttcdn.co/media/i/product/67486-1c6a74f6d81e40e4a88f7d45b3d21126.png?size=100",
-          "url-300": "https://images.ttcdn.co/media/i/product/67486-1c6a74f6d81e40e4a88f7d45b3d21126.png?size=300",
-          "url-500": "https://images.ttcdn.co/media/i/product/67486-1c6a74f6d81e40e4a88f7d45b3d21126.png?size=500",
-          "url-640": "https://images.ttcdn.co/media/i/product/67486-1c6a74f6d81e40e4a88f7d45b3d21126.png?size=640",
-          "url-1000": "https://images.ttcdn.co/media/i/product/67486-1c6a74f6d81e40e4a88f7d45b3d21126.png?size=1000",
-          "url-2000": "https://images.ttcdn.co/media/i/product/67486-1c6a74f6d81e40e4a88f7d45b3d21126.png?size=2000"
+          "url-100": 'https://imgix.ttcdn.co/i/product/original/0/25-7f8de7033c964b45b2c39306046f1963.png?w=100'
+          "url-1000": 'https://imgix.ttcdn.co/i/product/original/0/25-7f8de7033c964b45b2c39306046f1963.png?w=1000'
+          "url-2000": 'https://imgix.ttcdn.co/i/product/original/0/25-7f8de7033c964b45b2c39306046f1963.png?w=2000'
+          "url-30": 'https://imgix.ttcdn.co/i/product/original/0/25-7f8de7033c964b45b2c39306046f1963.png?w=30'
+          "url-300": 'https://imgix.ttcdn.co/i/product/original/0/25-7f8de7033c964b45b2c39306046f1963.png?w=300'
+          "url-40": 'https://imgix.ttcdn.co/i/product/original/0/25-7f8de7033c964b45b2c39306046f1963.png?w=40'
+          "url-45": 'https://imgix.ttcdn.co/i/product/original/0/25-7f8de7033c964b45b2c39306046f1963.png?w=45'
+          "url-50": 'https://imgix.ttcdn.co/i/product/original/0/25-7f8de7033c964b45b2c39306046f1963.png?w=50'
+          "url-500": 'https://imgix.ttcdn.co/i/product/original/0/25-7f8de7033c964b45b2c39306046f1963.png?w=500'
+          "url-640": 'https://imgix.ttcdn.co/i/product/original/0/25-7f8de7033c964b45b2c39306046f1963.png?w=640'
+          "url-75": 'https://imgix.ttcdn.co/i/product/original/0/25-7f8de7033c964b45b2c39306046f1963.png?w=75'
         }
       ],
-      "variations": [
-
-      ],
-      "primary_image": {
-        "url-30": "https://images.ttcdn.co/media/i/product/67486-1c6a74f6d81e40e4a88f7d45b3d21126.png?size=30",
-        "url-40": "https://images.ttcdn.co/media/i/product/67486-1c6a74f6d81e40e4a88f7d45b3d21126.png?size=40",
-        "url-45": "https://images.ttcdn.co/media/i/product/67486-1c6a74f6d81e40e4a88f7d45b3d21126.png?size=45",
-        "url-50": "https://images.ttcdn.co/media/i/product/67486-1c6a74f6d81e40e4a88f7d45b3d21126.png?size=50",
-        "url-75": "https://images.ttcdn.co/media/i/product/67486-1c6a74f6d81e40e4a88f7d45b3d21126.png?size=75",
-        "url-100": "https://images.ttcdn.co/media/i/product/67486-1c6a74f6d81e40e4a88f7d45b3d21126.png?size=100",
-        "url-300": "https://images.ttcdn.co/media/i/product/67486-1c6a74f6d81e40e4a88f7d45b3d21126.png?size=300",
-        "url-500": "https://images.ttcdn.co/media/i/product/67486-1c6a74f6d81e40e4a88f7d45b3d21126.png?size=500",
-        "url-640": "https://images.ttcdn.co/media/i/product/67486-1c6a74f6d81e40e4a88f7d45b3d21126.png?size=640",
-        "url-1000": "https://images.ttcdn.co/media/i/product/67486-1c6a74f6d81e40e4a88f7d45b3d21126.png?size=1000",
-        "url-2000": "https://images.ttcdn.co/media/i/product/67486-1c6a74f6d81e40e4a88f7d45b3d21126.png?size=2000"
+      variations: [
+        identifier: 'uNEU'
+        in_stock: true
+        is_default: false
+        label: 'Stor'
+        out_of_stock: false
+        position: 0
+        quantity: null
+      ,
+        identifier: '36Vrz'
+        in_stock: true
+        is_default: false
+        label: 'Liten'
+        out_of_stock: false
+        position: 0
+        quantity: null
+      ]
+      primary_image: {
+        "url-100": 'https://imgix.ttcdn.co/i/product/original/0/25-7f8de7033c964b45b2c39306046f1963.png?w=100'
+        "url-1000": 'https://imgix.ttcdn.co/i/product/original/0/25-7f8de7033c964b45b2c39306046f1963.png?w=1000'
+        "url-2000": 'https://imgix.ttcdn.co/i/product/original/0/25-7f8de7033c964b45b2c39306046f1963.png?w=2000'
+        "url-30": 'https://imgix.ttcdn.co/i/product/original/0/25-7f8de7033c964b45b2c39306046f1963.png?w=30'
+        "url-300": 'https://imgix.ttcdn.co/i/product/original/0/25-7f8de7033c964b45b2c39306046f1963.png?w=300'
+        "url-40": 'https://imgix.ttcdn.co/i/product/original/0/25-7f8de7033c964b45b2c39306046f1963.png?w=40'
+        "url-45": 'https://imgix.ttcdn.co/i/product/original/0/25-7f8de7033c964b45b2c39306046f1963.png?w=45'
+        "url-50": 'https://imgix.ttcdn.co/i/product/original/0/25-7f8de7033c964b45b2c39306046f1963.png?w=50'
+        "url-500": 'https://imgix.ttcdn.co/i/product/original/0/25-7f8de7033c964b45b2c39306046f1963.png?w=500'
+        "url-640": 'https://imgix.ttcdn.co/i/product/original/0/25-7f8de7033c964b45b2c39306046f1963.png?w=640'
+        "url-75": 'https://imgix.ttcdn.co/i/product/original/0/25-7f8de7033c964b45b2c39306046f1963.png?w=75'
       },
-      "add_to_cart": addToCartForm,
-      "add_to_cart_button": addToCartButton,
-      "sale_active": true
+      add_to_cart: addToCartForm
+      add_to_cart_button: addToCartButton
+      sale_active: true
+      variations_select: variationsSelect data.variations.length
 
     transformedProduct = transform(data)
 
     transformedProduct.should.eql(expected)
 
-    transformedProduct.price_tag().should.eql('''<span class="price_tag"><span class="original_price"
-      style="text-decoration: line-through">145.00 <span class="currency currency_sek">SEK</span></span> <span
-      class="sale_price">0.00 <span class="currency currency_sek">SEK</span></span></span>''')
+    transformedProduct.price_tag().should.eql '''<span class="price_tag"><span class="original_price"
+      style="text-decoration: line-through">50.00 <span class="currency currency_sek">SEK</span></span> <span
+      class="sale_price">35.00 <span class="currency currency_sek">SEK</span></span></span>'''

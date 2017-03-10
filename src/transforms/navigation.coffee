@@ -28,12 +28,4 @@ module.exports =
     navigation =
       navigation: _.values navigation
 
-    navigation.terms = ->
-      (label, render) ->
-        "<a class=\"tictail_terms fullscreen fullscreen_iframe\" href=\"#{store.url}/legal/terms\">#{render(label)}</a>"
-
-    navigation.return_policy = ->
-      (label, render) ->
-        "<a class=\"tictail_return-policy fullscreen fullscreen_iframe\" href=\"#{store.url}/legal/return-policy\">#{render(label)}</a>"
-
     navigation
