@@ -18,13 +18,13 @@ nock('https://api.tictail.com')
 describe 'Api', ->
   it 'should get an endpoint', ->
     api = new Api()
-    api.get("stores/t").then((data) ->
+    api.get('stores/t').then((data) ->
       data.constructor.should.eql(Object)
     )
 
   it 'should reject upon status > 200', ->
     api = new Api()
-    api.get("stores/0").fail (err) ->
+    api.get('stores/0').fail (err) ->
       err.status.should.eql(400)
 
   it 'caches data between requests', ->
@@ -32,8 +32,8 @@ describe 'Api', ->
 
     api = new Api()
 
-    api.get("stores/t").then(->
-      api.get("stores/t").then(->
+    api.get('stores/t').then(->
+      api.get('stores/t').then(->
         request.get.callCount.should.eql 1
         request.get.restore()
       )
