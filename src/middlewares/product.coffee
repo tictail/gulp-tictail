@@ -11,7 +11,7 @@ module.exports = (req, res, next) ->
   storeId = req.app.get 'store_id'
 
   res.promises.push(
-    api.get "stores/#{storeId}/products"
+    api.get "stores/#{storeId}/products?order_by=position"
       .then (data) ->
         datum = _.find(data, (datum) -> datum.slug is slug)
 
