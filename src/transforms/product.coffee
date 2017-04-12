@@ -64,13 +64,13 @@ module.exports =
         for size in [100, 1000, 2000, 30, 300, 40, 45, 50, 500, 640, 75]
           images["url-#{size}"] = "#{image.url}?w=#{size}"
         images
-      variations: _.map data.variations, (variation) ->
+      variations: _.map data.variations, (variation, index) ->
         return false if not variation.title
         label: variation.title
-        position: 0
+        position: index
         identifier: variation.id
         quantity: variation.quantity
-        is_default: false
+        is_default: index == 0
         in_stock: variation.quantity || variation.unlimited
         out_of_stock: !variation.quantity && !variation.unlimited
       variations_select: variationsSelect
