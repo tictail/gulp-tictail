@@ -23,6 +23,38 @@ module.exports =
     </form>
     """
 
+  currency_converter: ->
+    """
+      <div class="tictail_currency_converter">
+        <select>
+          <option data-decimals="2" value="EUR" selected="">Shop currency: EUR</option>
+          <option data-decimals="2" value="AUD">AUD</option>
+          <option data-decimals="2" value="CAD">CAD</option>
+          <option data-decimals="2" value="CHF">CHF</option>
+          <option data-decimals="2" value="CZK">CZK</option>
+          <option data-decimals="2" value="DKK">DKK</option>
+          <option data-decimals="2" value="EUR">EUR</option>
+          <option data-decimals="2" value="GBP">GBP</option>
+          <option data-decimals="2" value="HKD">HKD</option>
+          <option data-decimals="2" value="HUF">HUF</option>
+          <option data-decimals="2" value="ILS">ILS</option>
+          <option data-decimals="0" value="JPY">JPY</option>
+          <option data-decimals="2" value="MXN">MXN</option>
+          <option data-decimals="2" value="NOK">NOK</option>
+          <option data-decimals="2" value="NZD">NZD</option>
+          <option data-decimals="2" value="PHP">PHP</option>
+          <option data-decimals="2" value="PLN">PLN</option>
+          <option data-decimals="2" value="RUB">RUB</option>
+          <option data-decimals="2" value="SEK">SEK</option>
+          <option data-decimals="2" value="SGD">SGD</option>
+          <option data-decimals="2" value="THB">THB</option>
+          <option data-decimals="2" value="TRY">TRY</option>
+          <option data-decimals="2" value="TWD">TWD</option>
+          <option data-decimals="2" value="USD">USD</option>
+        </select>
+      </div>
+    """
+
   transform: (data) ->
     store =
       logotype: _.map data.logotype, (image) ->
@@ -40,11 +72,15 @@ module.exports =
       store_short_description: data.short_description
       store_subdomain: data.subdomain
       store_url: '' # Empty as this is for development
+      store_language: data.language
+      user_language: 'en'
       terms: -> module.exports.legalLink 'terms', data.url
       wallpaper: _.map [data.wallpapers.iphone], (image) ->
         images = {}
         for size in [640, 1000, 2000]
           images["url-#{size}"] = "#{image.url}?w=#{size}"
         images
+
+      currency_converter: module.exports.currency_converter
 
     store

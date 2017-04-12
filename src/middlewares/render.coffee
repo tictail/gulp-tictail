@@ -26,9 +26,11 @@ module.exports = (req, res) ->
       res.render 'theme', context, (err, html) ->
         $ = cheerio.load html
         context.partials = {} # fixes the context modifications made by consolidate.js
-        req.app.render 'colophon', context, (err, colophon) ->
-          $('body').append colophon
-          res.send $.html()
+        req.app.render 'head', context, (err, head) ->
+          $('head').prepend head
+          req.app.render 'body', context, (err, body) ->
+            $('body').append body
+            res.send $.html()
     .fail (err) ->
       status = switch err.constructor
         when HTTPError
