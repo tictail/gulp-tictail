@@ -40,6 +40,8 @@ module.exports =
       store_short_description: data.short_description
       store_subdomain: data.subdomain
       store_url: '' # Empty as this is for development
+      store_language: data.language
+      user_language: 'en'
       terms: -> module.exports.legalLink 'terms', data.url
       wallpaper: _.map [data.wallpapers.iphone], (image) ->
         images = {}
