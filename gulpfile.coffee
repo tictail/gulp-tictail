@@ -15,7 +15,7 @@ gulp.task 'coffee', ->
 
 gulp.task 'mustache', ->
   gulp.src "#{paths.src}.mustache"
-    .pipe gulp.dest('./lib/views/')
+    .pipe gulp.dest('./lib/')
 
 gulp.task 'watch', ->
   gulp.watch paths.src, ['coffee', 'mustache']

@@ -8,6 +8,7 @@ clean:
 
 build: clean
 	coffee -o lib -c src
+	gulp mustache
 
 update-responses:
 	curl https://api.tictail.com/v1.23/stores/t -o test/responses/store.json
