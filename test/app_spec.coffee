@@ -23,6 +23,10 @@ nock('https://api.tictail.com')
     .get('/v1.23/stores/t/categories')
     .replyWithFile(200, __dirname + '/responses/categories.json')
 
+nock('https://api.tictail.com')
+    .get('/v1.23/stores/t/instagram/media/recent')
+    .reply(200, {user: {}, posts: []})
+
 
 describe 'Storefront', ->
   it 'should get /', (done) ->
