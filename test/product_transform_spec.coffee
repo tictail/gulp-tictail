@@ -37,7 +37,7 @@ describe 'Product transforms', ->
       variations: [
         identifier: 'uNEU'
         in_stock: true
-        is_default: false
+        is_default: true
         label: 'Stor'
         out_of_stock: false
         position: 0
@@ -48,7 +48,7 @@ describe 'Product transforms', ->
         is_default: false
         label: 'Liten'
         out_of_stock: false
-        position: 0
+        position: 1
         quantity: null
       ]
       primary_image: {
