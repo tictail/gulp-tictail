@@ -1,7 +1,7 @@
 export PATH := $(shell npm bin):$(PATH)
 SHELL := /bin/bash
 
-.PHONY : clean build test publish
+.PHONY : clean build update-responses test release
 
 API_BASE=https://api.tictail.com/v1.23/stores/t
 
