@@ -1,15 +1,12 @@
 {
   "name": "gulp-tictail",
   "version": "0.3.0",
-  "author": [
-    "Joakim Ekberg",
-    "Erik Eng"
-  ],
-  "description": "Gulp target for simplifying Tictail theme creation",
+  "description": "Gulp target for simplifying Tictail theme creation.",
   "license": "MIT",
   "repository": "https://github.com/tictail/gulp-tictail.git",
   "main": "lib/index.js",
   "scripts": {
+    "2npm": "publish",
     "test": "make test"
   },
   "dependencies": {
@@ -31,6 +28,7 @@
     "gulp-coffee": "^2.2.0",
     "mocha": "^2.5.3",
     "nock": "^0.58.0",
+    "publish": "^0.6.0",
     "should": "^11.1.2",
     "sinon": "^1.12.2",
     "supertest": "^0.15.0"

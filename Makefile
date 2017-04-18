@@ -3,6 +3,8 @@ SHELL := /bin/bash
 
 .PHONY : clean build test publish
 
+API_BASE=https://api.tictail.com/v1.23/stores/t
+
 clean:
 	rm -rf lib
 
@@ -11,13 +13,12 @@ build: clean
 	gulp mustache
 
 update-responses:
-	curl https://api.tictail.com/v1.23/stores/t -o test/responses/store.json
-	curl https://api.tictail.com/v1.23/stores/t/products -o test/responses/products.json
-	curl https://api.tictail.com/v1.23/stores/t/categories -o test/responses/categories.json
+	curl ${API_BASE} -o test/responses/store.json
+	curl ${API_BASE}/products -o test/responses/products.json
+	curl ${API_BASE}/categories -o test/responses/categories.json
 
 test: build
 	mocha
 
-publish: clean build
-	npm publish
-	git push origin --tags
+release: clean build
+	@./release.sh
