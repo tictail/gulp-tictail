@@ -56,7 +56,10 @@ module.exports =
       )
 
     fs.mkdirSync(config.dist) unless fs.existsSync(config.dist)
-    fs.writeFileSync "#{config.dist}/theme.mustache", theme
-    util.log "Theme written to #{config.dist}/theme.mustache"
+
+    fileName = config.fileName or 'theme'
+    fs.writeFileSync "#{config.dist}/#{fileName}.html", theme
+
+    util.log "Theme written to #{config.dist}/theme.html"
 
     # TODO: Possible to return stream?
