@@ -60,6 +60,6 @@ module.exports =
     fileName = config.fileName or 'theme'
     fs.writeFileSync "#{config.dist}/#{fileName}.html", theme
 
-    util.log "Theme written to #{config.dist}/theme.html"
+    util.log "Theme written to #{config.dist}/#{fileName}.html"
 
     # TODO: Possible to return stream?
