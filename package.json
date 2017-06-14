@@ -1,6 +1,6 @@
 {
   "name": "gulp-tictail",
-  "version": "0.4.3",
+  "version": "0.5.0",
   "description": "Gulp target for simplifying Tictail theme creation.",
   "license": "MIT",
   "repository": "https://github.com/tictail/gulp-tictail.git",

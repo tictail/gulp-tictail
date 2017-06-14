@@ -11,6 +11,10 @@ module.exports =
   addToCartButton: ->
     (value, render) ->
       "<button type=\"submit\" class=\"tictail_button tictail_add_to_cart_button\">#{render(value)}</button>"
+  
+  saveButton: ->
+    (value, render) ->
+      "<button class=\"tictail_button tictail_save_button\" data-productId={{identifier}}>#{render(value)}</button>"
 
   formatPrice: (price, currency) ->
     "#{price.toFixed(2)} <span class=\"currency currency_#{currency.toLowerCase()}\">#{currency}</span>"
@@ -74,6 +78,7 @@ module.exports =
         in_stock: variation.quantity || variation.unlimited
         out_of_stock: !variation.quantity && !variation.unlimited
       variations_select: variationsSelect
+      save_button: module.exports.saveButton
 
     if product.variations.length is 1
       product.variations = []

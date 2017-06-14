@@ -1,4 +1,4 @@
-{transform, addToCartForm, addToCartButton, priceTag, variationsSelect} = require '../lib/transforms/product'
+{transform, addToCartForm, addToCartButton, saveButton, priceTag, variationsSelect} = require '../lib/transforms/product'
 data = require('./responses/products')[3]
 
 
@@ -66,6 +66,7 @@ describe 'Product transforms', ->
       },
       add_to_cart: addToCartForm
       add_to_cart_button: addToCartButton
+      save_button: saveButton
       sale_active: true
       variations_select: variationsSelect data.variations.length
 
