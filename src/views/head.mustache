@@ -1,18 +1,10 @@
-<iframe
-  name="tt_colophon"
-  id="tt_colophon"
-  src="https://tictail.com/cart/{{store_subdomain}}"
-  style="
-    position: fixed;
-    z-index: 9999;
-    top: 0;
-    right: 0;
-    height: 37px;
-    overflow: hidden;
-    background: none;
-    border: 0;
-  "
-></iframe>
+<script
+  id="tt_widget_loader"
+  src="https://tictail-apps.global.ssl.fastly.net/storefront-widget/loader.js"
+  data-feature-colophon
+  data-in-storefront
+  data-store-id="{{store_identifier}}"
+></script>
 
 <script>
   window.__ttBaseUrl = "https://tictail.com",

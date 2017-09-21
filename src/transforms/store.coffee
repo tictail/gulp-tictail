@@ -55,6 +55,12 @@ module.exports =
       </div>
     """
 
+  reviews: ->
+    """
+      <div class="tictail_reviews"></div>
+    """
+  
+
   transform: (data) ->
     store =
       logotype: _.map data.logotype, (image) ->
@@ -82,5 +88,6 @@ module.exports =
         images
 
       currency_converter: module.exports.currency_converter
+      reviews: module.exports.reviews
 
     store
