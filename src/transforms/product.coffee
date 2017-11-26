@@ -75,11 +75,13 @@ module.exports =
       is_quantity_unlimited: data.unlimited
       in_stock: data.quantity || data.unlimited
       out_of_stock: !data.quantity && !data.unlimited
-      all_images: _.map data.images, (image) ->
-        images = {}
+      all_images: _.map data.images, (image, index) ->
+        imageData =
+          is_primary: index == 0
+          position: index
         for size in [100, 1000, 2000, 30, 300, 40, 45, 50, 500, 640, 75]
-          images["url-#{size}"] = "#{image.url}?w=#{size}"
-        images
+          imageData["url-#{size}"] = "#{image.url}?w=#{size}"
+        imageData
       variations: _.map data.variations, (variation, index) ->
         return false if not variation.title
         label: variation.title
