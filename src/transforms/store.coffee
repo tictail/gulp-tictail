@@ -59,7 +59,6 @@ module.exports =
     """
       <div class="tictail_reviews"></div>
     """
-  
 
   transform: (data) ->
     store =
@@ -77,7 +76,7 @@ module.exports =
       store_name: data.name
       store_short_description: data.short_description
       store_subdomain: data.subdomain
-      store_url: '' # Empty as this is for development
+      store_url: '/'
       store_language: data.language
       user_language: 'en'
       terms: -> module.exports.legalLink 'terms', data.url
