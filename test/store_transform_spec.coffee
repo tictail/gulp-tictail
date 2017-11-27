@@ -27,7 +27,7 @@ describe 'Store transforms', ->
       store_name: 'The Startup Store'
       store_short_description: 'Stuff you will never want to have, trust me!'
       store_subdomain: 'thestartupstore'
-      store_url: ''
+      store_url: '/'
       terms: -> legalLink 'terms', data.url
       wallpaper: [
         'url-1000': 'https://imgix.ttcdn.co/i/wallpaper/original/0/25-68fa9936b87e403d948189716992a11a.jpeg?w=1000'

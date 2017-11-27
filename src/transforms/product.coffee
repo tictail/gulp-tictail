@@ -3,6 +3,23 @@ _ = require 'lodash'
 {priceToMajor} = require '../util'
 
 
+formatPrice = (price, currency) ->
+  "#{priceToMajor(price, currency).toFixed(2)} <span class=\"currency currency_#{currency.toUpperCase()}\">#{currency}</span>"
+
+priceTag = (price, originalPrice, saleActive, currency) ->
+  ->
+    return formatPrice(price, currency) unless saleActive
+    """<span class="price_tag"><span class="original_price"
+      style="text-decoration: line-through">#{formatPrice(originalPrice, currency)}</span> <span
+      class="sale_price">#{formatPrice(price, currency)}</span></span>"""
+
+imagePosition = (images, variation) ->
+  return null if variation.image_ids.length == 0
+  imagePositionMap = {}
+  for image, index in images
+    imagePositionMap[image.id] = index
+  return imagePositionMap[variation.image_ids[0]]
+
 module.exports =
   addToCartForm: ->
     (value, render) ->
@@ -11,63 +28,60 @@ module.exports =
   addToCartButton: ->
     (value, render) ->
       "<button type=\"submit\" class=\"tictail_button tictail_add_to_cart_button\">#{render(value)}</button>"
-  
+
   saveButton: ->
     (value, render) ->
       "<button class=\"tictail_button tictail_save_button\" data-productId={{identifier}}>#{render(value)}</button>"
 
-  formatPrice: (price, currency) ->
-    "#{price.toFixed(2)} <span class=\"currency currency_#{currency.toLowerCase()}\">#{currency}</span>"
-
-  priceTag: (price, originalPrice, saleActive) ->
+  variationsSelect: (variations) ->
+    return if variations.length <= 1
+    prices = []
+    for variation in variations
+      price = "#{variation.original_price}#{variation.sale_active}#{variation.sale_price}"
+      prices.push price if prices.indexOf(price) == -1
+    has_variation_prices = prices.length > 1
     ->
-      return price unless saleActive
-      """<span class="price_tag"><span class="original_price"
-        style="text-decoration: line-through">#{originalPrice}</span> <span
-        class="sale_price">#{price}</span></span>"""
-
-  variationsSelect: (numVariations) ->
-    return if numVariations <= 1
-    ->
-      (_, render) ->
+      (value, render) ->
         render """
           <select name="variation_id" class="tictail_select tictail_variations_select">
             {{#variations}}
-              {{#in_stock}}
-                <option value="{{id}}">{{label}}</option>
-              {{/in_stock}}
+              <option
+                data-price="{{price_without_currency}}"
+                data-currency-code="{{currency_code}}"
+                data-sale-active="{{sale_active}}"
+                data-original-price="{{original_price_without_currency}}"
+                data-image-position="{{image_position}}"
+                value="{{id}}"{{#out_of_stock}} disabled{{/out_of_stock}}>
+                #{if has_variation_prices then "{{label}} ({{price_without_currency}} {{currency_code}})" else "{{label}}"}
+              </option>
             {{/variations}}
           </select>
         """
 
   transform: (data) ->
-    price = priceToMajor data.price, data.currency
-    priceFormatted = module.exports.formatPrice price, data.currency
-    originalPrice = priceToMajor data.original_price, data.currency
-    originalPriceFormatted = module.exports.formatPrice originalPrice, data.currency
-    priceTag = module.exports.priceTag priceFormatted, originalPriceFormatted, data.sale_active
-    variationsSelect = module.exports.variationsSelect data.variations.length
     product =
       title: data.title
       description: data.description
       url: "product/#{data.slug}"
       absolute_url: "/product/#{data.slug}"
       identifier: data.id,
-      price: priceFormatted
-      price_without_currency: price
-      price_tag: priceTag
-      price_with_currency: priceTag
+      price: formatPrice data.price, data.currency
+      price_without_currency: priceToMajor data.price, data.currency
+      price_tag: priceTag data.price, data.original_price, data.sale_active, data.currency
+      price_with_currency: priceTag data.price, data.original_price, data.sale_active, data.currency
       sale_active: data.sale_active
       currency_code: data.currency
       quantity_sum: data.quantity
       is_quantity_unlimited: data.unlimited
       in_stock: data.quantity || data.unlimited
       out_of_stock: !data.quantity && !data.unlimited
-      all_images: _.map data.images, (image) ->
-        images = {}
+      all_images: _.map data.images, (image, index) ->
+        imageData =
+          is_primary: index == 0
+          position: index
         for size in [100, 1000, 2000, 30, 300, 40, 45, 50, 500, 640, 75]
-          images["url-#{size}"] = "#{image.url}?w=#{size}"
-        images
+          imageData["url-#{size}"] = "#{image.url}?w=#{size}"
+        imageData
       variations: _.map data.variations, (variation, index) ->
         return false if not variation.title
         label: variation.title
@@ -77,7 +91,13 @@ module.exports =
         is_default: index == 0
         in_stock: variation.quantity || variation.unlimited
         out_of_stock: !variation.quantity && !variation.unlimited
-      variations_select: variationsSelect
+        price: formatPrice variation.price, data.currency
+        price_without_currency: priceToMajor variation.price, data.currency
+        price_tag: priceTag variation.price, variation.original_price, variation.sale_active, data.currency
+        price_with_currency: priceTag variation.price, variation.original_price, variation.sale_active, data.currency
+        sale_active: variation.sale_active
+        image_position: imagePosition data.images, variation
+      variations_select: module.exports.variationsSelect data.variations
       save_button: module.exports.saveButton
 
     if product.variations.length is 1
