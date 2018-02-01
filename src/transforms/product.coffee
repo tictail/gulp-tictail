@@ -20,6 +20,27 @@ imagePosition = (images, variation) ->
     imagePositionMap[image.id] = index
   return imagePositionMap[variation.image_ids[0]]
 
+videoHlsStream = (image) ->
+  return null if image.type != 'video' or !image.data?.streams
+  stream = image.data.streams.find (s) -> s.quality == "hls"
+  return null if not stream
+  return {
+    src: stream.url
+    type: "application/x-mpegURL"
+  }
+
+videoSizeStream = (image, size) ->
+  return null if image.type != 'video' or !image.data?.streams
+  streams = image.data.streams.filter (s) -> s.quality != "hls"
+  streams = streams.sort (a, b) -> Math.abs(a.width - size) - Math.abs(b.width - size)
+  return null if streams.length == 0
+  stream = streams[0]
+  return {
+    src: stream.url
+    type: stream.type
+  }
+
+
 module.exports =
   addToCartForm: ->
     (value, render) ->
@@ -81,6 +102,19 @@ module.exports =
           position: index
         for size in [100, 1000, 2000, 30, 300, 40, 45, 50, 500, 640, 75]
           imageData["url-#{size}"] = "#{image.url}?w=#{size}"
+
+        if image.type == "video"
+          imageData.video = {}
+          hlsStream = videoHlsStream(image)
+          for size in [100, 200, 500, 1000, 2000]
+            sizeStream = videoSizeStream(image, size)
+            streams = []
+            streams.push(hlsStream) if hlsStream
+            streams.push(sizeStream) if sizeStream
+            imageData.video["streams-#{size}"] = streams
+        else
+          imageData.video = null
+
         imageData
       variations: _.map data.variations, (variation, index) ->
         return false if not variation.title
