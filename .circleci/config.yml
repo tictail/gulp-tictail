@@ -1,0 +1,28 @@
+version: 2
+
+jobs:
+  deployment:
+    working_directory: ~/gulp-tictail
+    docker:
+      - image: circleci/node:6
+
+    steps:
+      - checkout
+      - run: npm set progress=false
+      - restore_cache:
+          key: v1-dependency-cache-{{ checksum "package.json" }}
+      - run: npm install
+      - save_cache:
+          key: v1-dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+      - run: make release
+
+workflows:
+  version: 2
+  workflow:
+    jobs:
+      - deployment:
+          filters:
+            branches:
+              only: master
